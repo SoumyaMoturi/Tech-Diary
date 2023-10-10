@@ -12,7 +12,8 @@ flowchart TD;
     Environment --> Browser;
     Environment --> NodeJs;
     Browser --> Google;
-    Google --> V8["V8 (Js Engine)"];
+    Google --> V8;
+    V8 ~~~ |"Js Engine"|Google
 
 ```
 
@@ -35,8 +36,8 @@ flowchart LR
     subgraph "JS ENGINE"
     direction LR
     jscode["JS CODE"] --> PARSER
-    PARSER --> check{"Checks Js syntax?"}
-    check --> |correct|AST
+    PARSER ~~~|"checks js syntax"| jscode
+    PARSER --> |"generates AST<br>if syntax correct"|AST
     AST --> |AST|INTERPRETER
     INTERPRETER --> |"byte code"|COMPILER
     COMPILER --> |"machine code"|PROCESSOR
@@ -67,7 +68,7 @@ flowchart LR
 
   JAVSCRIPT uses **JIT COMPILER**
   **JIT COMPILER** : Mixture of interpreter and compiler.Translates the source to machine code while running the application.
-  eg: 
+  
 
    
 
