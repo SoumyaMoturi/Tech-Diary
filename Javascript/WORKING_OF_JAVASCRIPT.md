@@ -13,7 +13,7 @@ flowchart TD;
     Environment --> NodeJs;
     Browser --> Google;
     Google --> V8;
-    V8 ~~~ |"Js Engine"|Google
+    V8 ~~~ |"Js Engine"|V8
 
 ```
 
@@ -36,7 +36,7 @@ flowchart LR
     subgraph "JS ENGINE"
     direction LR
     jscode["JS CODE"] --> PARSER
-    PARSER ~~~|"checks js syntax"| jscode
+    PARSER ~~~|"checks js syntax"| PARSER
     PARSER --> |"generates AST<br>if syntax correct"|AST
     AST --> |AST|INTERPRETER
     INTERPRETER --> |"byte code"|COMPILER
