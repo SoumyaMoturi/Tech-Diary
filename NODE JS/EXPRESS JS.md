@@ -26,7 +26,10 @@ MERN stack.
  - Asynchronous
    
 ### Features of Express JS:
-
+- **Fast Server-Side Development**:  with the help of NOde.js features, express can save a lot of time.
+- **Middleware**: It is a request handler, which have access to the application's request-response cycle.
+- **Routing**: Refers to how an application's end points (URL's) respond to client requests.
+- 
 ### Advantages and Dis Advantages of EXPRESS JS:
 
 
