@@ -1,4 +1,4 @@
-**EXPRESS JS**
+# EXPRESS JS
 
 - Node Js is a javascript runtime environment that is fast, but it does not support request handling, HTTP methods, or serving files.
  so this is where Express JS comes into the picture.
@@ -26,6 +26,7 @@ MERN stack.
  - Asynchronous
    
 ### Features of Express JS:
-### Advantages and DisAdvantages of EXPRESS JS:
+
+### Advantages and Dis Advantages of EXPRESS JS:
 
 
