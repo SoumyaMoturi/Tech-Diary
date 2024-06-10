@@ -13,7 +13,7 @@ MERN stack.
 
 ### What is Express JS?
 
-- Express JS is a Node Js framework designed for building APIs, web applications, and cross-platform mobile apps.
+- Express JS is a Node JS framework designed for building APIs, web applications, and cross-platform mobile apps.
 - Express is high-performance, fast, unopinionated, and lightweight.
 - It is used as a server-side scripting language.
 
@@ -27,9 +27,19 @@ MERN stack.
    
 ### Features of Express JS:
 - **Fast Server-Side Development**:  with the help of NOde.js features, express can save a lot of time.
-- **Middleware**: It is a request handler, which have access to the application's request-response cycle.
-- **Routing**: Refers to how an application's end points (URL's) respond to client requests.
-- 
-### Advantages and Dis Advantages of EXPRESS JS:
+- **Middleware**: It is a request handler, which has access to the application's request-response cycle.
+- **Routing**: Refers to how an application's endpoints (URLs) respond to client requests.
+- **Templating**: Creates an HTML template file with less code and renders HTML Pages.
+- **Debugging**: Express makes it easier as it identifies the exact part where bugs are.
 
+### Advantages and Dis Advantages of EXPRESS JS:
+ **ADVANTAGES**:
+ - Express is very easy we can customize and use it as per our needs.
+ - A single language Javascript is used for front-end and back-end development.
+ - It is very fast to link databases like MySQL, MongoDB, etc.
+   
+ **DISADVANTAGES**:
+ - No structural way to organize things
+ - There are many issues in CallBacks.
+ - Error messages are not very helpful. 
 
