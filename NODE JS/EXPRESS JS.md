@@ -11,7 +11,19 @@
 MERN stack.
 - It manages routing, HTTP methods, sessions, and error handling.
 
-## What is Express Js?
+## What is Express JS?
+
+- Express JS is a Node Js framework designed for building APIs, web applications, and cross-platform mobile apps.
+- Express is high-performance, fast, unopinionated, and lightweight.
+- It is used as a server-side scripting language.
 
 ## Need for Express JS: 
+ - Instead of writing REST API using core modules of Node js, it takes less code and time with express.
+ - Time Efficient
+ - Money Efficient
+ - Fast
+ - Easy to learn
+ - Asynchronous
+   
+## Features of Express JS:
 
