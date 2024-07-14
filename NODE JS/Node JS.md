@@ -25,7 +25,7 @@
 
 - NODE JS is not a framework or a programming language.
 - It's a runtime environment used for executing a javascript code.
-- we often use nodes to build backend services like APIs.(able to use these services for both mobile and web applications)
+- we often use Node to build backend services like APIs.(able to use these services for both mobile and web applications)
 
 ### Features of Node Js:
 
