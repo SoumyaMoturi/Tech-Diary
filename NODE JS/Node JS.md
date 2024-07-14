@@ -38,4 +38,7 @@
 
 ### Links:
 
-- https://youtu.be/yEHCfRWz-EI?si=L8KVTpbbEV9jCczT
+- what is Node JS?
+    https://youtu.be/yEHCfRWz-EI?si=L8KVTpbbEV9jCczT
+- what is NPM ?
+    https://youtube.com/watch?v=M8nlgBQBxxo
