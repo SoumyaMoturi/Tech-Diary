@@ -20,7 +20,7 @@
 - With Node.js, you can build standalone applications and run JavaScript locally. Once HTTP functionality was incorporated, Node.js could also be used on the server side, leading to the development of various modules like HTTP and FS. While Java has the Spring framework and Python has Django, Node.js itself is not a framework. This gap was filled by Express.js, a framework designed for developing web applications with Node.js.
 
 - Node.js also includes NPM (Node Package Manager), which boasts a vast database of modules. Developers can use these existing modules or even create their own, greatly expanding the functionality and versatility of Node.js applications.
-- 
+  
 ### What is Node JS?
 
 - NODE JS is not a framework or a programming language.
