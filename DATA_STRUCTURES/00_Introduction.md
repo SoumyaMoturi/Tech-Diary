@@ -1,3 +1,4 @@
+
 ### DATA STRUCTURES:
 A named location that can be used to store and organize data.
 
@@ -10,3 +11,9 @@ A collection of steps to solve a problem.
 
 ### Arrays
 <a href="https://www.geeksforgeeks.org/javascript-arrays/#basic-terminologies-of-javascript-array" target="_blank" rel="noopener"><span>Arrays in JavaScript</span> </a>.
+
+
+
+### Interview Question Links
+
+- [Top 50+ Ineterview Questions](https://www.interviewbit.com/data-structure-interview-questions/)
