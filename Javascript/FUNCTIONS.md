@@ -53,6 +53,78 @@ const greet = function greet(name) {
 
 ```
 
+## Named Functions
+
+**Named functions** in JavaScript are functions that have a specific name given at the time of their definition. This name can be used to call the function or to refer to the function within its own scope, which is useful for recursion and debugging.
+
+### Example of a Named Function  
+
+Here’s a simple example of a named function:
+
+```javascript
+function add(a, b) {
+  return a + b;
+}
+
+console.log(add(2, 3)); // Output: 5
+
+```
+
+### Named Function Expressions 
+
+In addition to standard named functions, you can also create named function expressions. This means that even though the function is assigned to a variable, it retains its own name for internal use.
+
+``` javascript
+const factorial = function fact(n) {
+  if (n <= 1) {
+    return 1;
+  }
+  return n * fact(n - 1);
+};
+
+console.log(factorial(5)); // Output: 120
+```
+
+In this example:  
+fact is the name of the function, which is useful for recursive calls within the function.  
+factorial is the variable to which the function is assigned. You can call the function using the variable name.  
+
+### Benefits of Named Functions
+
+**Debugging**: Named functions provide more descriptive stack traces in debugging tools, making it easier to identify where an error occurred.  
+**Recursion**: Named function expressions allow the function to call itself, which is essential for recursive operations.  
+**Readability**: Named functions improve code readability by clearly indicating the purpose of the function.  
+
+### Comparison with Anonymous Functions
+Unlike anonymous functions, named functions have a specific name that can be used to refer to them within their own scope or for better error handling.  
+
+**Anonymous Function:**
+
+```javascript
+const greet = function(name) {
+  return `Hello, ${name}!`;
+};
+```
+
+**Named Function:**
+
+```javascript
+const greet = function greetUser(name) {
+  return `Hello, ${name}!`;
+};
+```
+
+In this comparison:
+The anonymous function doesn’t have a name, which can make debugging more difficult.  
+The named function (greetUser) can be used to identify the function in error messages and stack traces.    
+
+### Summary
+Named functions are an essential tool in JavaScript that offer benefits in terms of readability, debugging, and recursion. Use named functions to create clear and maintainable code, especially in situations where the function’s behavior is complex or prone to errors.  
+
+
+
+
+
 ## Immediately Invoked Function Expressions (IIFE)
 
 IIFEs are functions that are executed immediately after their definition. They are often used to create a new scope.
