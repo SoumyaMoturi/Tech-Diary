@@ -2,7 +2,7 @@
 
 | **Table of Contents** |
 |:--------|
-| [**sort()**](#sort-function) |
+| 1. [**sort()**](#sort-function) |
 
 ---
 
