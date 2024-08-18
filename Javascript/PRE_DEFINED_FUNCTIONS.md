@@ -1,5 +1,10 @@
-## Table of Contents
-- [sort() ](#`sort()`-functions)
+
+
+| **Table of Contents** |
+|:--------|
+| [**sort()**](#sort-function) |
+
+---
 
 # `sort()` Function
 
