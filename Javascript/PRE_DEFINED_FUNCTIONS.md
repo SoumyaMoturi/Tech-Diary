@@ -1,5 +1,5 @@
 ## Table of Contents
-- [`sort()` Function](#`sort()`-functions)
+- [sort() ](#`sort()`-functions)
 
 # `sort()` Function
 
