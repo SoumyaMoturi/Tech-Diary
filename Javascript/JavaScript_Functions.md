@@ -53,7 +53,6 @@ const greet = function greet(name) {
 
 ```
 
-## Named Functions
 
 **Named functions** in JavaScript are functions that have a specific name given at the time of their definition. This name can be used to call the function or to refer to the function within its own scope, which is useful for recursion and debugging.
 
