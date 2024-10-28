@@ -1,4 +1,4 @@
-# Redux: 
+# Redux
 
 Redux is a popular state management library that helps you manage and centralize application state in a predictable way. It’s commonly used with React, but it can be used with any JavaScript framework.
 
@@ -49,4 +49,32 @@ store.dispatch(increment()); // Increment count by 1
 store.dispatch(decrement()); // Decrement count by 1
 
 console.log(store.getState()); // { count: 0 } after both actions
+```
+## Using Redux with React
+
+```javascript
+import React from 'react';
+import { Provider, useDispatch, useSelector } from 'react-redux';
+
+const Counter = () => {
+  const count = useSelector((state) => state.count);
+  const dispatch = useDispatch();
+
+  return (
+    <div>
+      <p>Count: {count}</p>
+      <button onClick={() => dispatch(increment())}>Increment</button>
+      <button onClick={() => dispatch(decrement())}>Decrement</button>
+    </div>
+  );
+};
+
+// App Component
+const App = () => (
+  <Provider store={store}>
+    <Counter />
+  </Provider>
+);
+
+export default App;
 ```
