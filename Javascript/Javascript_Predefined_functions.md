@@ -19,6 +19,25 @@
 | |[splice()](#12-splice)|
 | |[sort()](#13-sort)|
 | |[reverse()](#14-reverse)|
+|[**String Functions**](#string-functions)||
+| |[charAt()](#charat)|
+| |[charCodeAt()](#charcodeat)|
+| |[concat()](#concat)|
+| |[includes()](#includes)|
+| |[indexOf()](#indexof)|
+| |[lastIndexOf()](#lastindexof)|
+| |[slice()](#slice)|
+| |[substring()](#substring)|
+| |[substr()](#substr)|
+| |[toLowerCase()](#tolowercase)|
+| |[toUpperCase()](#touppercase)|
+| |[trim()](#trim)|
+| |[replace()](#replace)|
+| |[split()](#split)|
+| |[match()](#match)|
+| |[repeat()](#repeat)|
+| |[startsWith()](#startswith)|
+| |[endsWith()](#endswith)|
 
 ---
 
@@ -191,7 +210,7 @@ To sort numbers correctly, you need to pass a comparison function as an argument
 - Zero if `a` and `b` are equal.
 - A positive number if `a` should come after `b`.
 
-### Example: Sorting Numbers in Ascending Order
+## Example: Sorting Numbers in Ascending Order
 ```javascript
 let numbers = [4, 2, 5, 1, 3];
 numbers.sort(function(a, b) {
@@ -200,7 +219,7 @@ numbers.sort(function(a, b) {
 console.log(numbers); // Output: [1, 2, 3, 4, 5]
 ```
 
-### Example: Sorting Numbers in Descending Order
+## Example: Sorting Numbers in Descending Order
 ```javascript
 let numbers = [4, 2, 5, 1, 3];
 numbers.sort(function(a, b) {
@@ -212,7 +231,7 @@ console.log(numbers); // Output: [5, 4, 3, 2, 1]
 ## Sorting Objects
 When sorting an array of objects, you can use a comparison function to determine the order based on one or more object properties.
 
-### Example: Sorting by Property
+## Example: Sorting by Property
 ```javascript
 let items = [
   { name: 'John', age: 30 },
@@ -236,7 +255,7 @@ console.log(items);
 ## Custom Sort Order
 You can customize the sort order based on your requirements by modifying the comparison function.
 
-### Example: Sorting Strings by Length
+## Example: Sorting Strings by Length
 ```javascript
 let words = ["banana", "apple", "cherry", "date"];
 words.sort(function(a, b) {
@@ -260,5 +279,168 @@ numbers.reverse();
 console.log(numbers); // Output: [5, 4, 3, 2, 1]
 ```
 
+# String Functions
 
- 
+ ## charAt()
+- **Description:** Returns the character at a specified index.
+- **Syntax:** `string.charAt(index)`
+- **Example:**
+  ```javascript
+  const text = "Hello";
+  console.log(text.charAt(1)); // Output: "e"
+  ```
+
+## charCodeAt()
+- **Description:** Returns the Unicode of the character at a specified index.
+- **Syntax:** `string.charCodeAt(index)`
+- **Example:**
+  ```javascript
+  const text = "Hello";
+  console.log(text.charCodeAt(1)); // Output: 101
+  ```
+
+## concat()
+- **Description:** Joins two or more strings.
+- **Syntax:** `string.concat(string2, string3, ..., stringN)`
+- **Example:**
+  ```javascript
+  const str1 = "Hello";
+  const str2 = "World";
+  console.log(str1.concat(" ", str2)); // Output: "Hello World"
+  ```
+
+## includes()
+- **Description:** Checks if a string contains a specified value.
+- **Syntax:** `string.includes(searchString[, position])`
+- **Example:**
+  ```javascript
+  const text = "JavaScript";
+  console.log(text.includes("Script")); // Output: true
+  ```
+
+## indexOf()
+- **Description:** Returns the index of the first occurrence of a specified value in a string. Returns `-1` if the value is not found.
+- **Syntax:** `string.indexOf(searchValue[, fromIndex])`
+- **Example:**
+  ```javascript
+  const text = "JavaScript";
+  console.log(text.indexOf("S")); // Output: 4
+  ```
+
+## lastIndexOf()
+- **Description:** Returns the index of the last occurrence of a specified value in a string.
+- **Syntax:** `string.lastIndexOf(searchValue[, fromIndex])`
+- **Example:**
+  ```javascript
+  const text = "Hello World Hello";
+  console.log(text.lastIndexOf("Hello")); // Output: 12
+  ```
+
+## slice()
+- **Description:** Extracts a part of a string and returns a new string.
+- **Syntax:** `string.slice(startIndex[, endIndex])`
+- **Example:**
+  ```javascript
+  const text = "JavaScript";
+  console.log(text.slice(0, 4)); // Output: "Java"
+  ```
+
+## substring()
+- **Description:** Similar to `slice()` but does not accept negative indexes.
+- **Syntax:** `string.substring(startIndex, endIndex)`
+- **Example:**
+  ```javascript
+  const text = "JavaScript";
+  console.log(text.substring(0, 4)); // Output: "Java"
+  ```
+
+## substr()
+- **Description:** Extracts a part of a string, starting at a specified index for a specified number of characters.
+- **Syntax:** `string.substr(startIndex, length)`
+- **Example:**
+  ```javascript
+  const text = "JavaScript";
+  console.log(text.substr(0, 4)); // Output: "Java"
+  ```
+
+## toLowerCase()
+- **Description:** Converts a string to lowercase letters.
+- **Syntax:** `string.toLowerCase()`
+- **Example:**
+  ```javascript
+  const text = "Hello World";
+  console.log(text.toLowerCase()); // Output: "hello world"
+  ```
+
+## toUpperCase()
+- **Description:** Converts a string to uppercase letters.
+- **Syntax:** `string.toUpperCase()`
+- **Example:**
+  ```javascript
+  const text = "Hello World";
+  console.log(text.toUpperCase()); // Output: "HELLO WORLD"
+  ```
+
+## trim()
+- **Description:** Removes whitespace from both ends of a string.
+- **Syntax:** `string.trim()`
+- **Example:**
+  ```javascript
+  const text = "  Hello World  ";
+  console.log(text.trim()); // Output: "Hello World"
+  ```
+
+## replace()
+- **Description:** Replaces a specified value with another value in a string.
+- **Syntax:** `string.replace(searchValue, newValue)`
+- **Example:**
+  ```javascript
+  const text = "Hello World";
+  console.log(text.replace("World", "JavaScript")); // Output: "Hello JavaScript"
+  ```
+
+## split()
+- **Description:** Splits a string into an array of substrings.
+- **Syntax:** `string.split(separator[, limit])`
+- **Example:**
+  ```javascript
+  const text = "Hello, World";
+  console.log(text.split(", ")); // Output: ["Hello", "World"]
+  ```
+
+## match()
+- **Description:** Searches a string for a match against a regular expression.
+- **Syntax:** `string.match(regexp)`
+- **Example:**
+  ```javascript
+  const text = "The rain in SPAIN";
+  console.log(text.match(/ain/g)); // Output: ["ain", "ain"]
+  ```
+
+## repeat()
+- **Description:** Returns a new string with a specified number of copies of the original string.
+- **Syntax:** `string.repeat(count)`
+- **Example:**
+  ```javascript
+  const text = "Hello";
+  console.log(text.repeat(3)); // Output: "HelloHelloHello"
+  ```
+
+## startsWith()
+- **Description:** Checks if a string starts with specified characters.
+- **Syntax:** `string.startsWith(searchString[, position])`
+- **Example:**
+  ```javascript
+  const text = "JavaScript";
+  console.log(text.startsWith("Java")); // Output: true
+  ```
+
+## endsWith()
+- **Description:** Checks if a string ends with specified characters.
+- **Syntax:** `string.endsWith(searchString[, length])`
+- **Example:**
+  ```javascript
+  const text = "JavaScript";
+  console.log(text.endsWith("Script")); // Output: true
+  ```
+
