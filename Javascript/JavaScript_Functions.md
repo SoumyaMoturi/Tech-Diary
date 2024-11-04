@@ -162,6 +162,48 @@ async function fetchData() {
 }
 ```
 
+## Pure Functions 
+
+
+A **pure function** is a function that, given the same input, will always return the same output and has **no side effects**. This means:
+1. **Deterministic**: The function returns the same result every time it is called with the same arguments.
+2. **No Side Effects**: The function does not alter any external state or rely on external state that may change.
+
+### Characteristics of Pure Functions
+
+- **Consistency**: A pure function will always yield the same output for identical inputs.
+- **No External Dependency**: It does not rely on or modify any external state or variables.
+- **Predictable and Testable**: Because they’re consistent, pure functions are easy to test and reason about.
+
+### Example of a Pure Function
+
+Below is an example of a pure function in JavaScript:
+
+```javascript
+function add(a, b) {
+  return a + b;
+}
+
+console.log(add(2, 3)); // Output: 5
+console.log(add(2, 3)); // Output: 5, always returns the same result with same inputs
+```
+
+###  Example of Impure Function 
+
+```javascript
+let count = 0;
+
+function increment() {
+  count += 1;
+  return count;
+}
+
+console.log(increment()); // Output: 1
+console.log(increment()); // Output: 2, different result each time
+
+
+```
+
 ## First-Class Functions
 
 ### Overview
