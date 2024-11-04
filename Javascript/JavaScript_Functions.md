@@ -1,3 +1,22 @@
+
+# Table of Contents
+---
+||**Topic**|
+|:--|:--|
+||[Function Declarations](#function-declarations)|
+||[Function Expressions](#function-expressions)|
+||[Arrow Functions](#arrow-functions)|
+||[Anonymous Functions](#anonymous-functions)|
+||[Named Functions](#named-functions)|
+||[Immediately Invoked Function Expressions (IIFE)](#immediately-invoked-function-expressions-iife)|
+||[Generator Functions](#generator-functions)|
+||[Async Functions](#async-functions)|
+||[Pure Functions](#pure-functions)|
+||[First-Class Functions](#first-class-functions)|
+||[Callback Functions](#callback-functions)|
+---
+
+
 # JavaScript Functions
 
 JavaScript functions are essential for structuring code and can be defined in various ways. 
