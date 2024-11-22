@@ -5,6 +5,7 @@
 | Section          | Description                                        |
 |------------------|----------------------------------------------------|
 |1.| [Differences Between Object and Map in JavaScript](#differences-between-object-and-map-in-javascript)|
+|2.|[Differences Between indexOf and findIndex in JavaScript](#differences-between-indexof-and-findindex-in-javaScript)|
 
 
 # Differences Between Object and Map in JavaScript
@@ -24,4 +25,23 @@
 
 - **Object**: Best for storing simple key-value pairs where keys are known in advance (e.g., configuration objects).
 - **Map**: Ideal for dynamic data collections where key types vary, and order matters.
+  
+
+# Differences Between indexOf and findIndex in JavaScript
+
+
+| Feature             | `indexOf`                                    | `findIndex`                                |
+|---------------------|-----------------------------------------------------|--------------------------------------------------|
+| **Input**           | A value (e.g., number, string)                      | A callback function (condition)                  |
+| **Comparison**      | Strict equality (`===`)                             | Custom logic using a callback                    |
+| **Return Value**    | Index of the value or `-1`                          | Index of the first match or `-1`                 |
+| **Use Case**        | Simple value search                                 | Conditional or complex searches                  |
+| **Supports Objects**| No                                                  | Yes                                              |
+| **Example**         | `const arr = [10, 20, 30];`                         | `const arr = [10, 20, 30];`                      |
+|                     | `arr.indexOf(20); // Output: 1`                     | `arr.findIndex(num => num > 25); // Output: 2`   |
+|                     | `arr.indexOf(40); // Output: -1`                    | `arr.findIndex(num => num > 40); // Output: -1`  |
+
+### Use Cases : 
+- Use **indexOf** when searching for a specific value in an array.
+- Use **findIndex** when searching based on a condition or when working with objects or complex criteria.
 
