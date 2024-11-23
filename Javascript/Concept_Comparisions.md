@@ -7,6 +7,7 @@
 |1.| [Differences Between Object and Map in JavaScript](#differences-between-object-and-map-in-javascript)|
 |2.|[Differences Between indexOf and findIndex in JavaScript](#differences-between-indexof-and-findindex-in-javaScript)|
 |3.|[React.memo vs useMemo](#reactmemo-vs-usememo)|
+|4.|[fetch vs axios](#fetch-vs-axios)|
 
 
 # Differences Between Object and Map in JavaScript
@@ -86,3 +87,19 @@ const MyComponent = ({ num }) => {
     return <div>Squared Value: {squared}</div>;
 };
 ```
+
+
+# fetch vs axios
+
+| **Feature**               | **fetch**                                   | **axios**                                       |
+|---------------------------|---------------------------------------------|------------------------------------------------|
+| **Built-in**               | Yes (native JavaScript)                     | No (requires installation)                     |
+| **Promise-based**          | Yes                                         | Yes                                            |
+| **Error handling**         | Doesn't reject on HTTP error status codes. You need to check `response.ok` or `response.status`. | Rejects on HTTP error statuses (e.g., 404, 500). |
+| **Automatic JSON Parsing** | No, you need to manually call `.json()`     | Yes, `response.data` contains parsed JSON data. |
+| **Request cancellation**   | No, you need to use `AbortController`       | Yes, using `axios.CancelToken`.                 |
+| **Timeout support**        | No, manual handling required.               | Yes, built-in support via `timeout` config.     |
+| **Browser compatibility**  | Supported by most modern browsers.          | Works in most browsers, including IE, with polyfills. |
+| **Response transformation**| No, manual handling needed.                 | Yes, supports transforming requests and responses. |
+| **File uploads**           | Requires manual handling.                   | Easier to handle with `FormData` support.      |
+
