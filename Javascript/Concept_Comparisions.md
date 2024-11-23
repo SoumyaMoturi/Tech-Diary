@@ -6,6 +6,7 @@
 |------------------|----------------------------------------------------|
 |1.| [Differences Between Object and Map in JavaScript](#differences-between-object-and-map-in-javascript)|
 |2.|[Differences Between indexOf and findIndex in JavaScript](#differences-between-indexof-and-findindex-in-javaScript)|
+|3.|[React.memo vs useMemo](#react.memo-vs-usememo)|
 
 
 # Differences Between Object and Map in JavaScript
@@ -45,3 +46,43 @@
 - Use **indexOf** when searching for a specific value in an array.
 - Use **findIndex** when searching based on a condition or when working with objects or complex criteria.
 
+
+# React.memo vs useMemo
+
+| **Feature**    | **React.memo**                          | **useMemo**                                     |
+|-----------------|-----------------------------------------|------------------------------------------------|
+| **Type**        | Higher-order component (HOC)           | React hook                                     |
+| **Purpose**     | Optimizes components by skipping re-renders. | Optimizes values by memoizing the result of a computation. |
+| **Scope**       | Works at the component level.          | Works at the value or computation level.       |
+| **Usage**       | Wraps functional components to memoize their output. | Used inside functional components for memoizing calculations or values. |
+| **Comparison**  | Compares props (shallow comparison by default). | Tracks dependencies to decide if the computation should re-run. |
+
+## Explanation
+
+**React.memo**
+- A higher-order component (HOC) that wraps functional components.
+- Avoids unnecessary re-renders by performing a shallow comparison of the component's props.
+- Useful for optimizing performance in components that re-render frequently without changes to props.
+
+**useMemo**
+- A React hook designed to memoize the result of a computation.
+- Prevents expensive calculations from re-running on every render by tracking dependency changes.
+- Often used within components to optimize performance by caching computed values.
+
+## Example Usage
+
+**React.memo**
+```jsx
+const MyComponent = React.memo(({ name }) => {
+    console.log('Rendered!');
+    return <div>Hello, {name}!</div>;
+});
+```
+**UseMemo**
+
+```jsx
+const MyComponent = ({ num }) => {
+    const squared = useMemo(() => num * num, [num]);
+    return <div>Squared Value: {squared}</div>;
+};
+```
