@@ -6,7 +6,7 @@
 |------------------|----------------------------------------------------|
 |1.| [Differences Between Object and Map in JavaScript](#differences-between-object-and-map-in-javascript)|
 |2.|[Differences Between indexOf and findIndex in JavaScript](#differences-between-indexof-and-findindex-in-javaScript)|
-|3.|[React.memo vs useMemo](#react.memo-vs-usememo)|
+|3.|[React.memo vs useMemo](#reactmemo-vs-usememo)|
 
 
 # Differences Between Object and Map in JavaScript
