@@ -169,7 +169,7 @@ person.greet.apply(person, ["Hello", "!"]);  // Output: "Hello Alice!"
 | **Dependence on Other Scripts** | Can cause issues if the script depends on others being executed before it. | Can rely on other deferred scripts since execution order is maintained. | Cannot depend on other scripts or execution order because it executes as soon as it’s ready. |
 | **Example**                | `<script src="example.js"></script>`                          | `<script src="example.js" defer></script>`                    | `<script src="example.js" async></script>`                    |
 
-
+![`defer`, `async`, and normal `<script>`](images/asyncVsDefer.png)
 # React
 
 # `Props` Vs `State` 
