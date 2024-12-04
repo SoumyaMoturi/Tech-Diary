@@ -140,23 +140,6 @@ const MyComponent = ({ num }) => {
 | **Syntax**           | `const memoizedValue = useMemo(() => compute(), [dependencies]);`        | `const memoizedCallback = useCallback(() => { callback }, [dependencies]);` |
 
 ---
-
-# `useState` Vs `useRef`
-
-| Feature               | **`useState`**                                         | **`useRef`**                                               |
-|-----------------------|--------------------------------------------------------|------------------------------------------------------------|
-| **Purpose**            | Used to hold and update state in a component.          | Used to persist values across renders without causing a re-render. |
-| **Re-renders**         | Triggers a re-render when the state changes.           | Does **not** trigger a re-render when the value changes.   |
-| **Mutability**         | The state is mutable and updated with `setState` (or the setter function from `useState`). | The ref object is mutable and can be changed directly.     |
-| **Value Persistence**  | The value is lost when the component re-renders.       | The value persists across re-renders without loss.         |
-| **Usage**              | Typically used for data that affects the UI and needs to trigger re-renders. | Typically used for DOM references, storing mutable data that doesn’t need to trigger re-renders. |
-| **Data Type**          | Stores primitive values, arrays, or objects that need re-rendering. | Stores any type of mutable object or DOM element reference. |
-| **Common Use Cases**   | Managing form inputs, counters, toggles, etc.           | Storing a reference to a DOM element or a persistent value across renders (e.g., for timeouts, interval IDs). |
-| **Example Usage**      | `const [count, setCount] = useState(0);`               | `const inputRef = useRef(null);`                            |
-
----
-
-
 ## Example 
 
 ```jsx
@@ -210,6 +193,23 @@ export default App;
 **key points :**
 - useMemo optimizes the filtering operation.
 - useCallback ensures the handleFilterChange function does not get recreated unnecessarily.
+
+
+# `useState` Vs `useRef`
+
+| Feature               | **`useState`**                                         | **`useRef`**                                               |
+|-----------------------|--------------------------------------------------------|------------------------------------------------------------|
+| **Purpose**            | Used to hold and update state in a component.          | Used to persist values across renders without causing a re-render. |
+| **Re-renders**         | Triggers a re-render when the state changes.           | Does **not** trigger a re-render when the value changes.   |
+| **Mutability**         | The state is mutable and updated with `setState` (or the setter function from `useState`). | The ref object is mutable and can be changed directly.     |
+| **Value Persistence**  | The value is lost when the component re-renders.       | The value persists across re-renders without loss.         |
+| **Usage**              | Typically used for data that affects the UI and needs to trigger re-renders. | Typically used for DOM references, storing mutable data that doesn’t need to trigger re-renders. |
+| **Data Type**          | Stores primitive values, arrays, or objects that need re-rendering. | Stores any type of mutable object or DOM element reference. |
+| **Common Use Cases**   | Managing form inputs, counters, toggles, etc.           | Storing a reference to a DOM element or a persistent value across renders (e.g., for timeouts, interval IDs). |
+| **Example Usage**      | `const [count, setCount] = useState(0);`               | `const inputRef = useRef(null);`                            |
+
+---
+
 
 
 # Typescript
