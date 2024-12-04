@@ -9,6 +9,7 @@
 |2.|[Differences Between indexOf and findIndex in JavaScript](#differences-between-indexof-and-findindex-in-javaScript)|
 |3.|[fetch vs axios](#fetch-vs-axios)|
 |4.|[bind, call Vs apply](#bind-call-vs-apply)|
+||[`defer`, `async`, and normal `<script>` tags](#defer-async-and-normal-<script>-tags)|
 |[React](#react)||
 |1.|[Props Vs State](#props-vs-state)|
 |2.|[React.memo vs UseMemo](#reactmemo-vs-usememo)|
@@ -154,6 +155,19 @@ person.greet.apply(person, ["Hello", "!"]);  // Output: "Hello Alice!"
 - bind(): When you need to pass a function around but with a fixed this context. Commonly used with event handlers or callbacks.
 - call(): When you want to invoke a function immediately with a specific this context and arguments passed individually.
 - apply(): When you want to invoke a function immediately with a specific this context and arguments passed as an array.
+
+# `defer`, `async`, and normal `<script>` tags
+
+| Feature                   | **Normal `<script>`**                                          | **`defer`**                                                    | **`async`**                                                   |
+|---------------------------|---------------------------------------------------------------|---------------------------------------------------------------|---------------------------------------------------------------|
+| **Execution Timing**       | Executes immediately as the script is encountered in the HTML. | Executes after the HTML document is fully parsed.             | Executes as soon as the script is downloaded, potentially before the HTML is fully parsed. |
+| **Blocking Behavior**      | Blocks parsing of the HTML document until the script is executed. | Does not block HTML parsing; script execution is deferred until parsing completes. | Does not block HTML parsing, but can execute out of order with respect to other scripts. |
+| **Script Execution Order** | Executes in the order it appears in the HTML document.        | Executes in the order it appears in the HTML document after parsing. | Executes as soon as the script is downloaded, potentially out of order with other scripts. |
+| **Use Case**               | Suitable for inline scripts or scripts that need to be executed immediately. | Suitable for scripts that don't depend on DOM content or other scripts. | Suitable for scripts that don't depend on other scripts or the DOM (e.g., analytics scripts). |
+| **Attributes**             | No special attributes (e.g., `<script src="file.js"></script>`). | `<script src="file.js" defer></script>`                       | `<script src="file.js" async></script>`                       |
+| **HTML Parsing**           | HTML parsing is blocked until the script has executed.        | HTML parsing continues while the script is being downloaded, but execution is deferred. | HTML parsing continues while the script is being downloaded and executed as soon as it's ready. |
+| **Dependence on Other Scripts** | Can cause issues if the script depends on others being executed before it. | Can rely on other deferred scripts since execution order is maintained. | Cannot depend on other scripts or execution order because it executes as soon as it’s ready. |
+| **Example**                | `<script src="example.js"></script>`                          | `<script src="example.js" defer></script>`                    | `<script src="example.js" async></script>`                    |
 
 
 # React
