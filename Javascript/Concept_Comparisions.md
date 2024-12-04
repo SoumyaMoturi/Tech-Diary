@@ -4,11 +4,17 @@
 
 | Section          | Description                                        |
 |------------------|----------------------------------------------------|
+|[Javascript](#javascript)||
 |1.| [Differences Between Object and Map in JavaScript](#differences-between-object-and-map-in-javascript)|
 |2.|[Differences Between indexOf and findIndex in JavaScript](#differences-between-indexof-and-findindex-in-javaScript)|
-|3.|[React.memo vs useMemo](#reactmemo-vs-usememo)|
-|4.|[fetch vs axios](#fetch-vs-axios)|
+|3.|[fetch vs axios](#fetch-vs-axios)|
+|[React](#react)||
+|1.|[React.memo vs useMemo](#reactmemo-vs-usememo)|
+|[TypeScript](#typescript)||
+|1.|[Unknown Vs Any Vs Void](#unknown-vs-any-vs-void)|
 
+
+# Javascript
 
 # Differences Between Object and Map in JavaScript
 
@@ -46,6 +52,23 @@
 ### Use Cases : 
 - Use **indexOf** when searching for a specific value in an array.
 - Use **findIndex** when searching based on a condition or when working with objects or complex criteria.
+
+
+# fetch vs axios
+
+| **Feature**               | **fetch**                                   | **axios**                                       |
+|---------------------------|---------------------------------------------|------------------------------------------------|
+| **Built-in**               | Yes (native JavaScript)                     | No (requires installation)                     |
+| **Promise-based**          | Yes                                         | Yes                                            |
+| **Error handling**         | Doesn't reject on HTTP error status codes. You need to check `response.ok` or `response.status`. | Rejects on HTTP error statuses (e.g., 404, 500). |
+| **Automatic JSON Parsing** | No, you need to manually call `.json()`     | Yes, `response.data` contains parsed JSON data. |
+| **Request cancellation**   | No, you need to use `AbortController`       | Yes, using `axios.CancelToken`.                 |
+| **Timeout support**        | No, manual handling required.               | Yes, built-in support via `timeout` config.     |
+| **Browser compatibility**  | Supported by most modern browsers.          | Works in most browsers, including IE, with polyfills. |
+| **Response transformation**| No, manual handling needed.                 | Yes, supports transforming requests and responses. |
+| **File uploads**           | Requires manual handling.                   | Easier to handle with `FormData` support.      |
+
+# React
 
 
 # React.memo vs useMemo
@@ -88,18 +111,32 @@ const MyComponent = ({ num }) => {
 };
 ```
 
+# Typescript
 
-# fetch vs axios
 
-| **Feature**               | **fetch**                                   | **axios**                                       |
-|---------------------------|---------------------------------------------|------------------------------------------------|
-| **Built-in**               | Yes (native JavaScript)                     | No (requires installation)                     |
-| **Promise-based**          | Yes                                         | Yes                                            |
-| **Error handling**         | Doesn't reject on HTTP error status codes. You need to check `response.ok` or `response.status`. | Rejects on HTTP error statuses (e.g., 404, 500). |
-| **Automatic JSON Parsing** | No, you need to manually call `.json()`     | Yes, `response.data` contains parsed JSON data. |
-| **Request cancellation**   | No, you need to use `AbortController`       | Yes, using `axios.CancelToken`.                 |
-| **Timeout support**        | No, manual handling required.               | Yes, built-in support via `timeout` config.     |
-| **Browser compatibility**  | Supported by most modern browsers.          | Works in most browsers, including IE, with polyfills. |
-| **Response transformation**| No, manual handling needed.                 | Yes, supports transforming requests and responses. |
-| **File uploads**           | Requires manual handling.                   | Easier to handle with `FormData` support.      |
+# Unknown Vs Any Vs Void
+
+```typescript
+let vAny: any = "Hello, world!";
+let vUnknown: unknown = "Hello, TypeScript!";
+
+// Any can be assigned directly to any other type
+let str1: string = vAny; // This works fine
+console.log(str1); // Output: Hello, world!
+
+// Unknown requires a type assertion before assignment
+// let str2: string = vUnknown; // Error: Type 'unknown' is not assignable to type 'string'
+let str2: string = vUnknown as string; // Correct: Using type assertion
+console.log(str2); // Output: Hello, TypeScript!
+
+// Any allows any property or method, even if it doesn't exist
+vAny.nonExistentMethod(); // No error, but this will fail at runtime if the method doesn't exist
+
+// Unknown doesn't allow any method or property access without a type check
+// vUnknown.nonExistentMethod(); // Error: Object is of type 'unknown'
+if (typeof vUnknown === "string") {
+    console.log(vUnknown.toUpperCase()); // This is safe after a type check
+}
+
+```
 
