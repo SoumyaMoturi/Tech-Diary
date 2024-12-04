@@ -12,7 +12,7 @@
 |1.|[Props Vs State](#props-vs-state)|
 |2.|[React.memo vs UseMemo](#reactmemo-vs-usememo)|
 |3.|[UseCallback vs UseMemo](#usecallback-vs-usememo)|
-|4.|[`useState` Vs `useRef`](#usestate-vs-useref)|
+|4.|[useState Vs useRef](#usestate-vs-useref)|
 |[TypeScript](#typescript)||
 |1.|[Unknown Vs Any Vs Void](#unknown-vs-any-vs-void)|
 
@@ -210,7 +210,10 @@ export default App;
 
 ---
 
+## Example 
 
+- useState causes the component to re-render when its value changes. It is used for data that impacts the rendering of the component.
+- useRef does not cause re-renders when its value is changed. It’s used to store mutable values that don't need to trigger a re-render, like the previous count value or DOM references.
 
 # Typescript
 
