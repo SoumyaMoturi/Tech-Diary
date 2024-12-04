@@ -9,8 +9,10 @@
 |2.|[Differences Between indexOf and findIndex in JavaScript](#differences-between-indexof-and-findindex-in-javaScript)|
 |3.|[fetch vs axios](#fetch-vs-axios)|
 |[React](#react)||
-|1.|[React.memo vs UseMemo](#reactmemo-vs-usememo)|
-|2.|[UseCallback vs UseMemo](#usecallback-vs-usememo)|
+|1.|[Props Vs State](#props-vs-state)|
+|2.|[React.memo vs UseMemo](#reactmemo-vs-usememo)|
+|3.|[UseCallback vs UseMemo](#usecallback-vs-usememo)|
+|4.|[`useState` Vs `useRef`](#usestate-vs-useref)|
 |[TypeScript](#typescript)||
 |1.|[Unknown Vs Any Vs Void](#unknown-vs-any-vs-void)|
 
@@ -70,6 +72,21 @@
 
 # React
 
+# `Props` Vs `State` 
+
+| Feature               | **Props**                                                  | **State**                                                 |
+|-----------------------|------------------------------------------------------------|-----------------------------------------------------------|
+| **Purpose**            | Used to pass data from a parent component to a child.      | Used to store data that changes over time within a component. |
+| **Mutability**         | Immutable (cannot be changed by the child component).      | Mutable (can be changed within the component).            |
+| **Ownership**          | Owned by the parent component.                            | Owned by the component itself.                           |
+| **Usage**              | Passed down to child components, typically set once.       | Managed within the component, can be updated with `setState`. |
+| **Change Trigger**     | Cannot be changed by the receiving component.              | Can be changed by the component using `setState`.          |
+| **Default Value**      | Passed from parent; must be set by the parent.             | Set within the component using `useState` or `this.setState`. |
+| **Type of Data**       | Can be any type of data (objects, arrays, functions, etc.). | Usually primitive types or objects/arrays.                |
+| **Re-rendering**       | Triggers re-rendering of the child component when changed. | Triggers re-rendering of the component when changed.      |
+| **Example Usage**      | `<ChildComponent name="John" age={30} />`                 | `const [count, setCount] = useState(0);`                  |
+
+---
 
 # React.memo vs useMemo
 
@@ -121,6 +138,21 @@ const MyComponent = ({ num }) => {
 | **Dependency Array** | Triggers recomputation of the value when dependencies change.            | Triggers re-creation of the function when dependencies change.           |
 | **Use Case Example** | Optimizing derived data, calculations, or component rendering.           | Preventing child component re-renders or maintaining event handler references. |
 | **Syntax**           | `const memoizedValue = useMemo(() => compute(), [dependencies]);`        | `const memoizedCallback = useCallback(() => { callback }, [dependencies]);` |
+
+---
+
+# `useState` Vs `useRef`
+
+| Feature               | **`useState`**                                         | **`useRef`**                                               |
+|-----------------------|--------------------------------------------------------|------------------------------------------------------------|
+| **Purpose**            | Used to hold and update state in a component.          | Used to persist values across renders without causing a re-render. |
+| **Re-renders**         | Triggers a re-render when the state changes.           | Does **not** trigger a re-render when the value changes.   |
+| **Mutability**         | The state is mutable and updated with `setState` (or the setter function from `useState`). | The ref object is mutable and can be changed directly.     |
+| **Value Persistence**  | The value is lost when the component re-renders.       | The value persists across re-renders without loss.         |
+| **Usage**              | Typically used for data that affects the UI and needs to trigger re-renders. | Typically used for DOM references, storing mutable data that doesn’t need to trigger re-renders. |
+| **Data Type**          | Stores primitive values, arrays, or objects that need re-rendering. | Stores any type of mutable object or DOM element reference. |
+| **Common Use Cases**   | Managing form inputs, counters, toggles, etc.           | Storing a reference to a DOM element or a persistent value across renders (e.g., for timeouts, interval IDs). |
+| **Example Usage**      | `const [count, setCount] = useState(0);`               | `const inputRef = useRef(null);`                            |
 
 ---
 
