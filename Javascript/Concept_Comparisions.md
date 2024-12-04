@@ -8,6 +8,7 @@
 |1.| [Differences Between Object and Map in JavaScript](#differences-between-object-and-map-in-javascript)|
 |2.|[Differences Between indexOf and findIndex in JavaScript](#differences-between-indexof-and-findindex-in-javaScript)|
 |3.|[fetch vs axios](#fetch-vs-axios)|
+|4.|[bind, call Vs apply](#bind-call-vs-apply)|
 |[React](#react)||
 |1.|[Props Vs State](#props-vs-state)|
 |2.|[React.memo vs UseMemo](#reactmemo-vs-usememo)|
@@ -68,7 +69,92 @@
 | **Timeout support**        | No, manual handling required.               | Yes, built-in support via `timeout` config.     |
 | **Browser compatibility**  | Supported by most modern browsers.          | Works in most browsers, including IE, with polyfills. |
 | **Response transformation**| No, manual handling needed.                 | Yes, supports transforming requests and responses. |
-| **File uploads**           | Requires manual handling.                   | Easier to handle with `FormData` support.      |
+| **File uploads**           | Requires manual handling.                   | Easier to handle with `FormData` support.    |
+
+# `bind`, `call` Vs `apply`
+
+| Feature                | **`bind()`**                                                | **`call()`**                                                  | **`apply()`**                                                 |
+|------------------------|-------------------------------------------------------------|--------------------------------------------------------------|--------------------------------------------------------------|
+| **Purpose**             | Returns a new function with a specific `this` value and arguments. | Invokes the function immediately with a specified `this` value and arguments. | Invokes the function immediately with a specified `this` value and arguments (as an array). |
+| **Return Value**        | A new function.                                            | The result of the function invocation.                       | The result of the function invocation.                       |
+| **Invocation**          | Does not invoke the function immediately. It returns a new function. | Invokes the function immediately.                            | Invokes the function immediately.                            |
+| **Arguments Handling**  | You can specify a fixed `this` value and optional arguments which are prepended to those passed during the invocation. | Pass arguments directly after the `this` value.              | Pass arguments as an array (or array-like object).           |
+| **Use Case**             | Useful when you want to pass a function around with a specific `this` value, especially in event handlers and callbacks. | Useful for invoking a function with a specific `this` context and immediate execution. | Similar to `call()`, but arguments are passed as an array or array-like object. |
+| **Example**             | `const greet = person.greet.bind(person, "Hello"); greet();` | `person.greet.call(person, "Hello");`                        | `person.greet.apply(person, ["Hello"]);`                     |
+| **Modification of `this`** | `this` is permanently bound to the given value.             | `this` is set dynamically at the time of the function invocation. | `this` is set dynamically at the time of the function invocation. |
+
+---
+
+## **Key Differences:**
+
+1. **`bind()`**:
+   - Does not invoke the function immediately.
+   - Returns a new function with the specified `this` value and optional arguments.
+   - Can be useful when you want to preserve `this` for later use (e.g., in event handlers).
+
+2. **`call()`**:
+   - Invokes the function immediately.
+   - Arguments are passed individually (not as an array).
+   - Used when you want to invoke a function with a specific `this` context immediately.
+
+3. **`apply()`**:
+   - Invokes the function immediately.
+   - Arguments are passed as an array (or array-like object).
+   - Useful when you have arguments stored in an array or array-like object and want to invoke the function with those arguments.
+   
+### Explanation of Differences:
+
+`bind()`
+bind creates a new function, which can be called later. It is useful when you need to "bind" a function to a specific this context and optionally pass initial arguments to it.
+Example:
+
+```javascript
+const person = {
+  name: "Alice",
+  greet: function(greeting) {
+    console.log(greeting + " " + this.name);
+  }
+};
+const greetPerson = person.greet.bind(person, "Hello");
+greetPerson();  // Output: "Hello Alice"
+```
+
+`call()`:
+
+call immediately invokes the function with a specified this context and individual arguments.
+Example:
+
+```javascript
+const person = {
+  name: "Alice",
+  greet: function(greeting) {
+    console.log(greeting + " " + this.name);
+  }
+};
+person.greet.call(person, "Hello");  // Output: "Hello Alice"
+```
+
+
+`apply()`:
+
+Similar to call(), but the arguments are passed as an array (or array-like object).
+Example:
+```javascript
+Copy code
+const person = {
+  name: "Alice",
+  greet: function(greeting, punctuation) {
+    console.log(greeting + " " + this.name + punctuation);
+  }
+};
+person.greet.apply(person, ["Hello", "!"]);  // Output: "Hello Alice!"
+```
+
+**When to Use Each:**
+- bind(): When you need to pass a function around but with a fixed this context. Commonly used with event handlers or callbacks.
+- call(): When you want to invoke a function immediately with a specific this context and arguments passed individually.
+- apply(): When you want to invoke a function immediately with a specific this context and arguments passed as an array.
+
 
 # React
 
