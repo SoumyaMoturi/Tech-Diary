@@ -116,6 +116,19 @@ const MyComponent = ({ num }) => {
 
 # Unknown Vs Any Vs Void
 
+## **Comparison Table**
+
+| Feature           | `unknown`                          | `void`                           | `any`                            |
+|--------------------|-------------------------------------|-----------------------------------|---------------------------|
+| **Purpose**        | Type-safe placeholder for unknown types. | Represents no value (e.g., for functions with no return). | Dynamic type that disables type safety. |
+| **Type Checking**  | Required before usage.             | Not applicable (used for no value). | No type-checking enforced.        |
+| **Flexibility**    | Limited without type-checking.     | Not flexible (strict purpose).   | Highly flexible but unsafe.       |
+| **Common Use Cases** | APIs returning unknown values.    | Functions with no return values. | Prototyping or gradual migration to TypeScript. |
+| **Example Usage**  | `let x: unknown;`                  | `function x(): void {}`          | `let x: any;`                     |
+
+---
+
+
 ```typescript
 let vAny: any = "Hello, world!";
 let vUnknown: unknown = "Hello, TypeScript!";
