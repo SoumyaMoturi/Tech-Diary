@@ -9,7 +9,7 @@
 |2.|[Differences Between indexOf and findIndex in JavaScript](#differences-between-indexof-and-findindex-in-javaScript)|
 |3.|[fetch vs axios](#fetch-vs-axios)|
 |4.|[bind, call Vs apply](#bind-call-vs-apply)|
-||[`defer`, `async`, and normal `<script>` tags](#defer-async-and-normal-<script>-tags)|
+||[defer, async, and normal <script> tags](#defer-async-and-normal-script-tags)|
 |[React](#react)||
 |1.|[Props Vs State](#props-vs-state)|
 |2.|[React.memo vs UseMemo](#reactmemo-vs-usememo)|
