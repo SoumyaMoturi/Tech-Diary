@@ -124,6 +124,62 @@ const MyComponent = ({ num }) => {
 
 ---
 
+
+## Example 
+
+```jsx
+import React, { useState, useMemo, useCallback } from 'react';
+
+function FilteredList({ filter }: { filter: string }) {
+  const list = ["apple", "banana", "cherry", "date", "elderberry"];
+
+  const filteredList = useMemo(() => {
+    console.log("Filtering list...");
+    return list.filter((item) => item.includes(filter));
+  }, [filter]);
+
+  return (
+    <ul>
+      {filteredList.map((item, index) => (
+        <li key={index}>{item}</li>
+      ))}
+    </ul>
+  );
+}
+
+function App() {
+  const [filter, setFilter] = useState("");
+  const [count, setCount] = useState(0);
+
+  const handleFilterChange = useCallback(
+    (e: React.ChangeEvent<HTMLInputElement>) => {
+      setFilter(e.target.value);
+    },
+    []
+  );
+
+  return (
+    <div>
+      <input
+        type="text"
+        placeholder="Filter"
+        value={filter}
+        onChange={handleFilterChange}
+      />
+      <FilteredList filter={filter} />
+      <button onClick={() => setCount(count + 1)}>Increment Count: {count}</button>
+    </div>
+  );
+}
+
+export default App;
+
+```
+**key points :**
+- useMemo optimizes the filtering operation.
+- useCallback ensures the handleFilterChange function does not get recreated unnecessarily.
+
+
 # Typescript
 
 
