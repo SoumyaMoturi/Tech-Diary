@@ -198,7 +198,7 @@ export default App;
 # `useState` Vs `useRef`
 
 | Feature               | **`useState`**                                         | **`useRef`**                                               |
-|-----------------------|--------------------------------------------------------|------------------------------------------------------------|
+|-----------------------|--------------------------------------------------------|---------------------------------------|
 | **Purpose**            | Used to hold and update state in a component.          | Used to persist values across renders without causing a re-render. |
 | **Re-renders**         | Triggers a re-render when the state changes.           | Does **not** trigger a re-render when the value changes.   |
 | **Mutability**         | The state is mutable and updated with `setState` (or the setter function from `useState`). | The ref object is mutable and can be changed directly.     |
@@ -211,6 +211,33 @@ export default App;
 ---
 
 ## Example 
+
+```tsx
+import React, { useState, useEffect, useRef } from 'react';
+
+function CountTracker() {
+  // State to hold the current count value
+  const [count, setCount] = useState(0);
+
+  // Ref to store the previous count value (without causing re-render)
+  const prevCountRef = useRef<number>(0);
+
+  // Update the previous count when count changes
+  useEffect(() => {
+    prevCountRef.current = count;
+  }, [count]);  // This effect runs every time `count` changes
+
+  return (
+    <div>
+      <h2>Current Count: {count}</h2>
+      <h3>Previous Count: {prevCountRef.current}</h3>
+      <button onClick={() => setCount(count + 1)}>Increment Count</button>
+    </div>
+  );
+}
+
+export default CountTracker;
+```
 
 - useState causes the component to re-render when its value changes. It is used for data that impacts the rendering of the component.
 - useRef does not cause re-renders when its value is changed. It’s used to store mutable values that don't need to trigger a re-render, like the previous count value or DOM references.
@@ -233,7 +260,7 @@ export default App;
 ---
 
 
-```typescript
+```tsx
 let vAny: any = "Hello, world!";
 let vUnknown: unknown = "Hello, TypeScript!";
 
