@@ -9,10 +9,10 @@
 |2.|[Differences Between indexOf and findIndex in JavaScript](#differences-between-indexof-and-findindex-in-javaScript)|
 |3.|[fetch vs axios](#fetch-vs-axios)|
 |[React](#react)||
-|1.|[React.memo vs useMemo](#reactmemo-vs-usememo)|
+|1.|[React.memo vs UseMemo](#reactmemo-vs-usememo)|
+|2.|[UseCallback vs UseMemo](#usecallback-vs-usememo)|
 |[TypeScript](#typescript)||
 |1.|[Unknown Vs Any Vs Void](#unknown-vs-any-vs-void)|
-
 
 # Javascript
 
@@ -110,6 +110,19 @@ const MyComponent = ({ num }) => {
     return <div>Squared Value: {squared}</div>;
 };
 ```
+
+# UseCallback Vs UseMemo
+
+| Feature             | `useMemo`                                                                 | `useCallback`                                                            |
+|---------------------|---------------------------------------------------------------------------|---------------------------------------------------------------------------|
+| **Purpose**          | Caches the result of a computation to avoid unnecessary recalculations.  | Caches a function reference to avoid unnecessary re-creations.           |
+| **Return Value**     | Returns a **memoized value**.                                             | Returns a **memoized callback function**.                                |
+| **When to Use**      | When you have an expensive computation and want to avoid re-computing it on every render. | When you pass a callback as a prop to child components or need stable references for dependencies. |
+| **Dependency Array** | Triggers recomputation of the value when dependencies change.            | Triggers re-creation of the function when dependencies change.           |
+| **Use Case Example** | Optimizing derived data, calculations, or component rendering.           | Preventing child component re-renders or maintaining event handler references. |
+| **Syntax**           | `const memoizedValue = useMemo(() => compute(), [dependencies]);`        | `const memoizedCallback = useCallback(() => { callback }, [dependencies]);` |
+
+---
 
 # Typescript
 
