@@ -10,6 +10,7 @@
 |3.|[fetch vs axios](#fetch-vs-axios)|
 |4.|[bind, call Vs apply](#bind-call-vs-apply)|
 |5.|[defer, async, and normal <script> tags](#defer-async-and-normal-script-tags)|
+|6.|[View State Vs Session State](#view-state-vs-session-state)|
 |[React](#react)||
 |1.|[Props Vs State](#props-vs-state)|
 |2.|[React.memo vs UseMemo](#reactmemo-vs-usememo)|
@@ -187,6 +188,22 @@ person.greet.apply(person, ["Hello", "!"]);  // Output: "Hello Alice!"
 | **Example Usage**      | `<ChildComponent name="John" age={30} />`                 | `const [count, setCount] = useState(0);`                  |
 
 ---
+
+# View State Vs Session State
+
+| Feature                       | **View State**                                              | **Session State**                                            |
+|-------------------------------|-------------------------------------------------------------|-------------------------------------------------------------|
+| **Storage Location**           | Stored in the client-side browser (as hidden input or in memory). | Stored on the server-side (session store, cookies, or memory). |
+| **Lifetime**                   | Data is preserved for the duration of a page load or postback. | Data persists for the duration of a user's session (usually until the session expires or the user logs out). |
+| **Scope**                       | Page-specific. The data is tied to a single page and not shared across pages. | User-specific. The data is shared across multiple pages within the same user session. |
+| **Data Security**              | Less secure because it is stored on the client-side and can be tampered with. | More secure since data is stored on the server-side, inaccessible to the client. |
+| **Data Size Limit**            | Typically small, limited by hidden input field size (4 KB or less). | Can store larger amounts of data, depending on server memory or database storage. |
+| **Performance**                | Affects page load time, as it has to be transmitted with every postback. | Performance is typically better, as data is stored on the server and not sent with every request. |
+| **Persistence**                | Data is not persistent across different pages unless passed explicitly (e.g., via form submission). | Data persists across multiple page requests within the user session. |
+| **Use Case**                   | Used for maintaining data that is specific to a single page (like user input or form state). | Used for data that needs to persist across different pages (like authentication status or shopping cart contents). |
+| **Example**                    | Storing form data in a hidden input for postback.           | Storing user authentication status across multiple pages. |
+| **Example in Code**            | `<input type="hidden" id="viewState" value="SomeStateData"/>` | `sessionStorage.setItem('username', 'JohnDoe');` in JavaScript. |
+
 
 # React.memo vs useMemo
 
