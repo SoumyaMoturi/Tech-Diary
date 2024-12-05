@@ -12,6 +12,7 @@
 |5.|[bind, call Vs apply](#bind-call-vs-apply)|
 |6.|[defer, async, and normal <script> tags](#defer-async-and-normal-script-tags)|
 |7.|[View State Vs Session State](#view-state-vs-session-state)|
+|8.|[Throttling Vs Debouncing](#throttling-vs-debouncing)|
 |[React](#react)||
 |1.|[Props Vs State](#props-vs-state)|
 |2.|[React.memo vs UseMemo](#reactmemo-vs-usememo)|
@@ -186,6 +187,94 @@ person.greet.apply(person, ["Hello", "!"]);  // Output: "Hello Alice!"
 | **Example**                | `<script src="example.js"></script>`                          | `<script src="example.js" defer></script>`                    | `<script src="example.js" async></script>`                    |
 
 ![`defer`, `async`, and normal `<script>`](images/asyncVsDefer.png)
+
+
+# View State Vs Session State
+
+| Feature                       | **View State**                                              | **Session State**                                            |
+|-------------------------------|-------------------------------------------------------------|-------------------------------------------------------------|
+| **Storage Location**           | Stored in the client-side browser (as hidden input or in memory). | Stored on the server-side (session store, cookies, or memory). |
+| **Lifetime**                   | Data is preserved for the duration of a page load or postback. | Data persists for the duration of a user's session (usually until the session expires or the user logs out). |
+| **Scope**                       | Page-specific. The data is tied to a single page and not shared across pages. | User-specific. The data is shared across multiple pages within the same user session. |
+| **Data Security**              | Less secure because it is stored on the client-side and can be tampered with. | More secure since data is stored on the server-side, inaccessible to the client. |
+| **Data Size Limit**            | Typically small, limited by hidden input field size (4 KB or less). | Can store larger amounts of data, depending on server memory or database storage. |
+| **Performance**                | Affects page load time, as it has to be transmitted with every postback. | Performance is typically better, as data is stored on the server and not sent with every request. |
+| **Persistence**                | Data is not persistent across different pages unless passed explicitly (e.g., via form submission). | Data persists across multiple page requests within the user session. |
+| **Use Case**                   | Used for maintaining data that is specific to a single page (like user input or form state). | Used for data that needs to persist across different pages (like authentication status or shopping cart contents). |
+| **Example**                    | Storing form data in a hidden input for postback.           | Storing user authentication status across multiple pages. |
+| **Example in Code**            | `<input type="hidden" id="viewState" value="SomeStateData"/>` | `sessionStorage.setItem('username', 'JohnDoe');` in JavaScript. |
+
+
+
+
+# Throttling Vs Debouncing
+
+Throttling and debouncing are techniques used to limit how frequently a function is called during events like scrolling, resizing, or typing. While both concepts are used to optimize performance, they serve different purposes.
+
+## Key Differences Between Throttling and Debouncing
+
+| **Aspect**               | **Throttle**                                             | **Debounce**                                               |
+|--------------------------|---------------------------------------------------------|-----------------------------------------------------------|
+| **Definition**            | Throttling ensures a function is executed at most once in a specified time interval. | Debouncing ensures a function is executed only once after a specified delay, typically after the last event in a series. |
+| **When the function is called** | The function is called at regular intervals, at most once every specified time period (e.g., 200ms). | The function is called after a certain period of inactivity, after the last event. |
+| **Use Case**              | Used for continuous events like scrolling, resizing, or mouse movements, where you want to limit how often a function runs. | Used for events that are fired multiple times in a short period, like typing in an input field or button clicks, where you want to wait until the user stops. |
+| **How it behaves**        | The function is called at a consistent rate, irrespective of how many times the event is triggered during the interval. | The function is delayed until the event stops being triggered for a specified time. |
+| **Example Use Cases**     | - Handling `scroll` events<br>- Throttling `resize` events<br>- API polling at intervals | - User input for search bar<br>- Window resizing that only triggers the final size change<br>- Button click events (e.g., submit form) |
+| **Function Calls**        | The function will be invoked repeatedly, but only once in the defined interval, no matter how many times the event occurs during that interval. | The function will only be called once, and only after a specified delay after the last event occurs. |
+| **Rate of Execution**     | Controlled rate: function is invoked at most once in a fixed time period. | Delay based: function is invoked once after a pause in the event sequence. |
+| **Example**               | Scrolling: Log scroll position once every 200ms, even if scrolling occurs more frequently. | Typing in an input: Trigger search after 300ms of inactivity (user stops typing). |
+| **Behavior for Frequent Events** | Executes at consistent intervals during frequent events. | Waits for the event to stop and only executes once. |
+
+
+## Example 
+
+**Debounce** 
+
+```javascript
+function debounce(func, delay) {
+  let timeout;
+  
+  return function(...args) {
+    clearTimeout(timeout);
+    timeout = setTimeout(() => func(...args), delay);
+  };
+}
+
+// Usage: Input field debouncing
+document.getElementById('input').addEventListener('input', debounce(function(event) {
+  console.log('User stopped typing: ', event.target.value);
+}, 500));  // Calls the function only after 500ms of no typing
+
+
+```
+
+**Throttle**
+
+```javascript
+function throttle(func, delay) {
+  let lastCall = 0;
+  
+  return function(...args) {
+    const now = new Date().getTime();
+    
+    if (now - lastCall >= delay) {
+      func(...args);
+      lastCall = now;
+    }
+  };
+}
+
+// Usage: Scroll event throttling
+window.addEventListener('scroll', throttle(function() {
+  console.log('Scrolled!');
+}, 1000));  // Only calls the function once every 1 second
+
+```
+**Key Points** : 
+
+- **Throttling**: Executes the function at regular intervals (e.g., once every 1000ms), regardless of how often the event is triggered.
+- **Debouncing**: Executes the function only after the event has stopped being triggered for a specified time (e.g., 500ms after the last keystroke).
+
 # React
 
 # `Props` Vs `State` 
@@ -203,22 +292,6 @@ person.greet.apply(person, ["Hello", "!"]);  // Output: "Hello Alice!"
 | **Example Usage**      | `<ChildComponent name="John" age={30} />`                 | `const [count, setCount] = useState(0);`                  |
 
 ---
-
-# View State Vs Session State
-
-| Feature                       | **View State**                                              | **Session State**                                            |
-|-------------------------------|-------------------------------------------------------------|-------------------------------------------------------------|
-| **Storage Location**           | Stored in the client-side browser (as hidden input or in memory). | Stored on the server-side (session store, cookies, or memory). |
-| **Lifetime**                   | Data is preserved for the duration of a page load or postback. | Data persists for the duration of a user's session (usually until the session expires or the user logs out). |
-| **Scope**                       | Page-specific. The data is tied to a single page and not shared across pages. | User-specific. The data is shared across multiple pages within the same user session. |
-| **Data Security**              | Less secure because it is stored on the client-side and can be tampered with. | More secure since data is stored on the server-side, inaccessible to the client. |
-| **Data Size Limit**            | Typically small, limited by hidden input field size (4 KB or less). | Can store larger amounts of data, depending on server memory or database storage. |
-| **Performance**                | Affects page load time, as it has to be transmitted with every postback. | Performance is typically better, as data is stored on the server and not sent with every request. |
-| **Persistence**                | Data is not persistent across different pages unless passed explicitly (e.g., via form submission). | Data persists across multiple page requests within the user session. |
-| **Use Case**                   | Used for maintaining data that is specific to a single page (like user input or form state). | Used for data that needs to persist across different pages (like authentication status or shopping cart contents). |
-| **Example**                    | Storing form data in a hidden input for postback.           | Storing user authentication status across multiple pages. |
-| **Example in Code**            | `<input type="hidden" id="viewState" value="SomeStateData"/>` | `sessionStorage.setItem('username', 'JohnDoe');` in JavaScript. |
-
 
 # React.memo vs useMemo
 
