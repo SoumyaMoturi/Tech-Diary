@@ -5,12 +5,13 @@
 | Section          | Description                                        |
 |------------------|----------------------------------------------------|
 |[Javascript](#javascript)||
-|1.| [Differences Between Object and Map in JavaScript](#differences-between-object-and-map-in-javascript)|
-|2.|[Differences Between indexOf and findIndex in JavaScript](#differences-between-indexof-and-findindex-in-javaScript)|
-|3.|[fetch vs axios](#fetch-vs-axios)|
-|4.|[bind, call Vs apply](#bind-call-vs-apply)|
-|5.|[defer, async, and normal <script> tags](#defer-async-and-normal-script-tags)|
-|6.|[View State Vs Session State](#view-state-vs-session-state)|
+|1.|[ES5 Vs ES6](#es5-vs-es6)|
+|2.| [Differences Between Object and Map in JavaScript](#differences-between-object-and-map-in-javascript)|
+|3.|[Differences Between indexOf and findIndex in JavaScript](#differences-between-indexof-and-findindex-in-javaScript)|
+|4.|[fetch vs axios](#fetch-vs-axios)|
+|5.|[bind, call Vs apply](#bind-call-vs-apply)|
+|6.|[defer, async, and normal <script> tags](#defer-async-and-normal-script-tags)|
+|7.|[View State Vs Session State](#view-state-vs-session-state)|
 |[React](#react)||
 |1.|[Props Vs State](#props-vs-state)|
 |2.|[React.memo vs UseMemo](#reactmemo-vs-usememo)|
@@ -20,6 +21,20 @@
 |1.|[Unknown Vs Any Vs Void](#unknown-vs-any-vs-void)|
 
 # Javascript
+
+# ES5 Vs ES6
+
+
+| **Feature**            | **ES5**                      | **ES6**                                |
+|-------------------------|------------------------------|----------------------------------------|
+| **Variable Declarations** | `var`                    | `let`, `const`                        |
+| **Functions**           | Regular functions           | Arrow functions                       |
+| **Classes**             | Prototype-based inheritance | `class` syntax                        |
+| **Strings**             | Concatenation               | Template literals                     |
+| **Modules**             | `require`                  | `import`/`export`                     |
+| **Promises**            | Callbacks                  | Promises                              |
+| **Syntax Enhancements** | None                       | Destructuring, Spread, Rest, etc.     |
+
 
 # Differences Between Object and Map in JavaScript
 
