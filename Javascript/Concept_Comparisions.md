@@ -20,6 +20,8 @@
 |4.|[useState Vs useRef](#usestate-vs-useref)|
 |[TypeScript](#typescript)||
 |1.|[Unknown Vs Any Vs Void](#unknown-vs-any-vs-void)|
+|[Node Js](#node-js)||
+|1.|[ES Modules Vs CommonJS](#es-modules-vs-commonjs)|
 
 # Javascript
 
@@ -488,4 +490,67 @@ if (typeof vUnknown === "string") {
 }
 
 ```
+
+
+# NodeJs
+
+# ES Modules Vs CommonJS
+
+| Feature                         | ES Modules (ESM)                     | CommonJS (CJS)                      |
+|---------------------------------|--------------------------------------|-------------------------------------|
+| **Syntax**                      | `import` and `export`                | `require` and `module.exports`     |
+| **File Extension**              | `.mjs` (default) or `.js` with `"type": "module"` in `package.json` | `.js` (default)                     |
+| **Imports**                     | Static (at the top of the file)      | Dynamic (can be conditional)        |
+| **Exports**                     | Named and default exports            | Only `module.exports` or `exports` |
+| **Top-level `this`**            | `undefined`                          | `exports` object                    |
+| **Execution Timing**            | Executes in strict mode by default   | Executes in sloppy mode unless strict mode is explicitly enabled |
+| **File Resolution**             | Follows URL resolution logic         | Follows `require` resolution logic |
+| **Asynchronous Loading**        | Supports `import()` for dynamic imports | Fully synchronous                  |
+| **Interoperability**            | Use `createRequire` to load CJS in ESM | Use `require` to load ESM (experimental) |
+| **Caching**                     | Separate cache for ESM and CJS       | Shares a single cache for CJS       |
+| **Tooling Support**             | Requires compatibility for older tools | Widely supported across tools      |
+
+
+how **import statements in ES Modules (ESM)** are **installed (resolved)** and **executed** in Node.js.
+
+## ESM Module Behavior
+
+| **Aspect**            | **Behavior**                                                                                                                                                 |
+|-----------------------|----------------------------------------------------|
+| **Installation**       | - **Static Analysis**: ESM's `import` statements are resolved at compile-time before execution begins.                                                       |
+|                       | - The module loader locates the dependencies using their exact file paths or the resolution algorithm for extensions (`.js`, `.mjs`, etc.).                   |
+|                       | - Modules are fetched and cached for subsequent reuse.                                                                                                     |
+| **Execution**          | - ESM imports are **asynchronous** and executed in the following order:                                                                                     |
+|                       |   1. **Dependency Tree Evaluation**: All dependencies (imported modules) are recursively evaluated first.                                                    |
+|                       |   2. **Top-Down Execution**: The module's own code runs after all its dependencies are resolved.                                                           |
+|                       | - Execution follows **strict mode** by default.                                                                                                             |
+| **Caching**            | - Modules are cached after the first import. Any subsequent import reuses the already loaded module without re-execution.                                    |
+| **Dynamic Import**     | - Supports asynchronous `import()` to dynamically load modules at runtime. This returns a `Promise` and executes after all static imports are resolved.      |
+
+## Key Points
+
+- **Static Resolution**: Dependencies are resolved before execution, allowing for better optimization and performance.
+- **Asynchronous Import**: Import statements are asynchronous, and modules are executed after their dependencies are resolved.
+- **Strict Mode**: ESM modules always run in strict mode, enforcing stricter syntax and runtime checks.
+- **Caching**: Once imported, modules are cached and reused in future imports.
+- **Dynamic Import**: The `import()` syntax allows dynamic, on-demand loading of modules during runtime.
+
+## CJS Module Behavior
+
+| **Aspect**            | **Behavior**                                                                                                                                                 |
+|-----------------------|--------------------------------------------|
+| **Installation**       | - The `require` statement resolves the module path at runtime using Node.js's resolution algorithm.                                                          |
+|                       | - Dependencies are located synchronously. Node.js checks extensions (`.js`, `.json`, `.node`) and resolves paths recursively.                               |
+| **Execution**          | - Modules are loaded and executed synchronously in the order of their `require` calls.                                                                       |
+|                       | - After resolving dependencies, the module's code runs immediately.                                                                                         |
+|                       | - CJS modules do not run in strict mode by default.                                                                                                         |
+| **Caching**            | - Modules are cached after the first `require`. Any subsequent `require` uses the cached module.                                                            |
+|                       | - Circular dependencies are partially resolved by providing an incomplete module during execution.                                                          |
+| **Dynamic Loading**    | - CJS does not support dynamic imports like `import()`. However, you can conditionally call `require` to load modules at runtime.                           |
+
+## Key Points
+
+- **Synchronous Execution**: Modules are executed synchronously when `require` is called, and dependencies are resolved at runtime.
+- **Caching**: Modules are cached after being required once to improve performance.
+- **No Dynamic Imports**: CommonJS does not support dynamic imports like `import()`, but you can conditionally use `require` to load modules dynamically.
 
