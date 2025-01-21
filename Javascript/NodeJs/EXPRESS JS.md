@@ -1,0 +1,45 @@
+# EXPRESS JS
+
+- Node Js is a javascript runtime environment that is fast, but it does not support request handling, HTTP methods, or serving files.
+ so this is where Express JS comes into the picture.
+- Express JS makes the Node JS code easier.
+- Express provides a wide range of features to develop both web and mobile applications.
+- It is used to develop single-page, multi-page, and hybrid-page applications.
+- Express is written on javascript, so it is very easy to understand.
+- Until now, Express is the most popular framework of Node Js.
+- In the MERN stack, "E" stands for express Js. It is the backend part of 
+MERN stack.
+- It manages routing, HTTP methods, sessions, and error handling.
+
+### What is Express JS?
+
+- Express JS is a Node JS framework designed for building APIs, web applications, and cross-platform mobile apps.
+- Express is high-performance, fast, unopinionated, and lightweight.
+- It is used as a server-side scripting language.
+
+### Need for Express JS: 
+ - Instead of writing REST API using core modules of Node js, it takes less code and time with express.
+ - Time Efficient
+ - Money Efficient
+ - Fast
+ - Easy to learn
+ - Asynchronous
+   
+### Features of Express JS:
+- **Fast Server-Side Development**:  with the help of NOde.js features, express can save a lot of time.
+- **Middleware**: It is a request handler, which has access to the application's request-response cycle.
+- **Routing**: Refers to how an application's endpoints (URLs) respond to client requests.
+- **Templating**: Creates an HTML template file with less code and renders HTML Pages.
+- **Debugging**: Express makes it easier as it identifies the exact part where bugs are.
+
+### Advantages and Dis Advantages of EXPRESS JS:
+ **ADVANTAGES**:
+ - Express is very easy we can customize and use it as per our needs.
+ - A single language Javascript is used for front-end and back-end development.
+ - It is very fast to link databases like MySQL, MongoDB, etc.
+   
+ **DISADVANTAGES**:
+ - No structural way to organize things
+ - There are many issues in CallBacks.
+ - Error messages are not very helpful. 
+
