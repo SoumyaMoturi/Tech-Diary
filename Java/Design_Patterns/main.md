@@ -56,7 +56,7 @@
 - **Use Structural patterns** when working with relationships between objects.
 - **Use Behavioral patterns** when defining communication between objects.  
 
-![Design Patterns Overview](/pattern1.png)
-![Design Patterns Overview](/pattern2.png)
+![Design Patterns Overview](./pattern1.png)
+![Design Patterns Overview](./pattern2.png)
 
 
