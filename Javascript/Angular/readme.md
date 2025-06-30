@@ -7,7 +7,9 @@
 
 ## Why do we need a framework or why we use Angular?
   we don't need angular or any framework for trivial websites and webapps.But framework simplifies the process of building complex, interactive web user interfaces.
-- Angular promotes declarative programming, allowing developers to describe what the UI should look like, rather than writing step-by-step instructions like in imperative JavaScript.  
+  
+- Angular promotes declarative programming, allowing developers to describe what the UI should look like, rather than writing step-by-step instructions like in imperative JavaScript.
+
 **Imperative (JavaScript):**
 ```javascript
 const heading = document.createElement('h1');
