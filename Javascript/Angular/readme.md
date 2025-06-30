@@ -28,3 +28,11 @@ Each component has its own template, style, and logic, making it easier to:
   -  Test in isolation
 - Angular leverages OOP concepts like encapsulation, abstraction, inheritance, and polymorphism to create modular, maintainable codebases. This structured approach makes it easier to scale large applications without turning the code into a tangled mess.
 - Uses TypeScript for safer and cleaner code Angular is built with TypeScript, which helps catch errors early and makes code easier to write, read, and manage—perfect for building large apps with confidence.
+  
+## The Angular CLI
+ Angular CLI speeds up development It lets you quickly create projects, generate components, run tests, and build apps with simple commands—no manual setup needed. This boosts productivity and ensures best practices are followed from the start.
+
+ To install the Angular CLI, 
+ ```
+npm install -g @angular/cli
+```
