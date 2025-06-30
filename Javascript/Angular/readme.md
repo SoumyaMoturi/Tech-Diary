@@ -26,3 +26,5 @@ Each component has its own template, style, and logic, making it easier to:
  1. Update one piece without touching the others
  2. Reuse components elsewhere (like UserCardComponent in a search result)
  3. Test in isolation
+- Angular leverages OOP concepts like encapsulation, abstraction, inheritance, and polymorphism to create modular, maintainable codebases. This structured approach makes it easier to scale large applications without turning the code into a tangled mess.
+- Uses TypeScript for safer and cleaner code Angular is built with TypeScript, which helps catch errors early and makes code easier to write, read, and manage—perfect for building large apps with confidence.
