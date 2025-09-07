@@ -14,9 +14,11 @@
    - [REST APIs](#rest-apis)
 4. [Core Building Blocks](#core-building-blocks-of-gcp)
    - [Compute Services](#compute-services)
+         -[Google App Engine](#google-app-engine)
    - [Storage Services](#storage-services)
    - [Networking Services](#networking-services)
    - [Identity and Access Management (IAM)](#identity-and-access-management-iam)
+     
 
 ---
 
@@ -138,6 +140,84 @@ These building blocks enable developers and organizations to build scalable, sec
 | **Cloud Run** | Serverless platform for running stateless containers triggered by HTTP requests. |
 | **Cloud Functions** | Lightweight, event-driven serverless functions for microservices and automation. |
 | **App Engine** | Platform-as-a-Service (PaaS) for deploying web applications without managing infrastructure. |
+
+### Google App Engine:
+- One of the first compute services from google(PaaS)
+- Fully managed platform for deploying web applications at scale. (though we can run background services or services that do not have a frontend but are predominantly meant for web apps that interact with users, that is accessible through a domain)
+- Supports multiple languages, frameworks, and libraries. For example, can deploy applications written in Python, or React in JavaScript, or Flask in Python.
+- App Engine lets you deploy web apps without managing servers. It offers two environments:
+   - **Standard**: Fast, simple, and cost-efficient.
+   - **Flexible**: More control, supports custom runtimes via Docker.
+
+#### Standard Vs Flexible
+
+| Feature         | **Standard Environment**          | **Flexible Environment**       |
+|-----------------|-----------------------------------|--------------------------------|
+| **Runtime**                | Predefined (e.g., Python, Node.js, Java)          | Custom via Docker (any language or framework)     |
+| **Scaling**                | Auto-scaling (can scale to zero)                  | Auto or manual (minimum 1 instance always running)|
+| **Startup Time**           | Very fast (seconds)                               | Slower (minutes)                                  |
+| **Traffic Spikes**         | Handles sudden spikes well                        | Better for steady or predictable traffic          |
+| **Background Tasks**       | Limited support                                   | Full support (threads, long-running processes)    |
+| **Local Disk Access**      | Only `/tmp` directory                             | Full read/write access                            |
+| **SSH Access**             | Not available                                     | Available for debugging                           |
+| **Custom Libraries**       | Limited to supported ones                         | Full flexibility with native dependencies         |
+| **Pricing**                | Pay-per-use, scales down to zero                  | VM-based pricing, always-on instances             |
+
+---
+
+#### When to Use What
+
+Use **Standard** if:
+- You want fast deployment and low cost.
+- Your app uses supported languages and frameworks.
+- You need to scale quickly with minimal config.
+
+Use **Flexible** if:
+- You need custom runtimes or native libraries.
+- Your app has consistent traffic or long-running tasks.
+- You want more control over infrastructure and debugging.
+
+#### ⚠️ Why App Engine Is No Longer Recommended
+
+Google Cloud has shifted its strategic focus toward **Cloud Run** and other modern serverless platforms. While App Engine is still available, there are several reasons it's falling out of favor:
+
+
+**Deprecation of Legacy Runtimes**
+
+- As of **January 2024**, many first-generation runtimes (e.g., Python 2.7, Java 8, PHP 5/7, Node.js 10–16) have reached **end-of-support**.
+- These runtimes no longer receive **security patches** or updates, increasing risk for production apps.
+
+
+
+**Limited Flexibility**
+
+- App Engine Standard restricts you to **sandboxed environments** and **predefined runtimes**.
+- Even App Engine Flexible, while Docker-based, lacks the **portability and simplicity** of Cloud Run.
+
+**Strategic Shift to Cloud Run**
+
+Google is actively promoting **Cloud Run** as the go-to platform for containerized, serverless workloads.
+
+Cloud Run offers:
+- ✅ Greater flexibility with custom containers  
+- 🚀 Faster deployments  
+- 💰 Simpler pricing  
+- 🔧 Better integration with CI/CD pipelines and modern DevOps workflows  
+
+**Slower Innovation**
+
+- App Engine receives **fewer updates and features** compared to Cloud Run and Cloud Functions.
+- Developers are encouraged to migrate to platforms that align with **Google’s long-term roadmap**.
+
+
+**What to Use Instead**
+
+| Use Case                        | Recommended Platform |
+|----------------------------------|----------------------|
+| Stateless web APIs               | Cloud Run            |
+| Event-driven functions           | Cloud Functions      |
+| Custom container workloads       | Cloud Run or GKE     |
+| Full VM control                  | Compute Engine       |
 
 
 ## Storage Services
