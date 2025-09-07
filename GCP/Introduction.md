@@ -128,7 +128,8 @@ These building blocks enable developers and organizations to build scalable, sec
 
 ## Compute Services
 
-These services provide the processing power to run applications and workloads.
+- These services provide the processing power to run applications and workloads.
+- Code is deployed and executed in one of the compute services
 
 | Service | Description |
 |--------|-------------|
