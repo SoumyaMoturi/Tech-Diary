@@ -1,4 +1,4 @@
-# 🌐 Google Cloud Platform (GCP) Overview
+# Google Cloud Platform (GCP) Overview
 
 ## Table of Contents
 1. [Introduction to GCP](#introduction-to-gcp)
@@ -14,12 +14,12 @@
    - [REST APIs](#rest-apis)
 4. [Core Building Blocks](#core-building-blocks-of-gcp)
    - [Compute Services](#compute-services)
-         -[Google App Engine](#google-app-engine)
+      -[Google App Engine](#google-app-engine)
+      -[Google Compute Engine](#google-compute-engine-gce)
    - [Storage Services](#storage-services)
    - [Networking Services](#networking-services)
    - [Identity and Access Management (IAM)](#identity-and-access-management-iam)
-     
-
+   
 ---
 
 ## Introduction to GCP
@@ -65,7 +65,6 @@ Regions are independent geographic areas where GCP resources are hosted.
 
 ### Zones
 Zones are deployment areas within regions. Each region typically has 3 or more zones (e.g., `us-central1-a`, `us-central1-b`).
-
 Zones provide fault isolation and high availability for workloads.
 
 
@@ -123,9 +122,13 @@ These interaction methods range from **graphical user interfaces (GUIs)** for ea
 ---
 
 
-# Core Building Blocks of GCP
+## Core Building Blocks of GCP
 
-Google Cloud Platform offers a wide range of services grouped into foundational categories: **Compute**, **Storage**, **Networking**, and **Identity & Access Management (IAM)**. 
+Google Cloud Platform offers a wide range of services grouped into foundational categories: 
+- **Compute**
+-  **Storage**
+-  **Networking**
+-  **Identity & Access Management (IAM)**. 
 These building blocks enable developers and organizations to build scalable, secure, and efficient cloud-native applications.
 
 ## Compute Services
@@ -165,7 +168,7 @@ These building blocks enable developers and organizations to build scalable, sec
 
 ---
 
-#### When to Use What
+**When to Use What**
 
 Use **Standard** if:
 - You want fast deployment and low cost.
@@ -177,7 +180,7 @@ Use **Flexible** if:
 - Your app has consistent traffic or long-running tasks.
 - You want more control over infrastructure and debugging.
 
-#### ⚠️ Why App Engine Is No Longer Recommended
+## Why App Engine Is No Longer Recommended
 
 Google Cloud has shifted its strategic focus toward **Cloud Run** and other modern serverless platforms. While App Engine is still available, there are several reasons it's falling out of favor:
 
@@ -218,6 +221,87 @@ Cloud Run offers:
 | Event-driven functions           | Cloud Functions      |
 | Custom container workloads       | Cloud Run or GKE     |
 | Full VM control                  | Compute Engine       |
+
+
+### Google Compute Engine `(GCE)`
+
+Google Compute Engine (GCE) is the Infrastructure-as-a-Service (IaaS) offering from Google Cloud Platform. It allows users to run scalable, customizable virtual machines (VMs) on Google’s global infrastructure.
+
+
+## What Is GCE?
+
+- GCE provides **on-demand virtual machines** (VMs) for running applications, services, and workloads.
+- It supports both **Linux** and **Windows** operating systems.
+- VMs can be launched from **standard images** or **custom images**.
+- Ideal for lift-and-shift migrations, legacy apps, and custom OS-level configurations.
+
+---
+
+## ⚙️ Key Features
+
+### 🧮 Machine Types
+- **Predefined types**: e2, n2, c2, etc., optimized for general, compute, or memory-intensive workloads.
+- **Custom types**: Tailor CPU and memory to match exact workload needs.
+
+### 💾 Persistent Storage
+- Attach **Standard** or **SSD Persistent Disks** to VMs.
+- Supports **snapshots**, **resizing**, and **detachment** across zones.
+
+### 🌍 Global Infrastructure
+- Deploy VMs across **multiple regions and zones** for high availability.
+- Backed by Google’s reliable fiber network.
+
+### 🔄 Live Migration
+- VMs are automatically migrated during maintenance with **zero downtime**.
+
+### 🔐 Security
+- Integrated with **IAM** for fine-grained access control.
+- Supports **Shielded VMs** for enhanced protection against rootkits and boot-level attacks.
+
+---
+
+## 💰 Pricing Model
+
+- **Billing granularity**: Charged per second after a 1-minute minimum.
+- **Sustained Use Discounts**: Automatically applied for VMs running most of the month.
+- **Committed Use Discounts**: Up to 57% savings for 1-year or 3-year commitments.
+- **Spot VMs**: Great for fault-tolerant workloads at up to 80% lower cost.
+
+---
+
+## 🧠 Ideal Use Cases
+
+| Use Case                          | Why GCE Works Well                     |
+|-----------------------------------|----------------------------------------|
+| Custom OS or software stack       | Full VM control                        |
+| Stateful or long-running services | Persistent disks, stable IPs           |
+| High-performance workloads        | GPU/TPU support, optimized machines    |
+| Lift-and-shift migrations         | Easy transition from on-prem to cloud |
+| Legacy apps or monoliths          | No need to refactor for containers     |
+
+---
+
+## 🛠️ Management & Automation
+
+- Manage VMs via:
+  - **Google Cloud Console**
+  - **gcloud CLI**
+  - **REST APIs**
+- Automate deployments using:
+  - **Cloud Deployment Manager**
+  - **Terraform**
+  - **Startup scripts**
+
+---
+
+## 🔄 Alternatives to Consider
+
+| Requirement                        | Recommended Service     |
+|------------------------------------|--------------------------|
+| Stateless containerized workloads  | Cloud Run               |
+| Managed Kubernetes clusters        | Google Kubernetes Engine (GKE) |
+| Event-driven functions             | Cloud Functions         |
+| Full VM control and customization  | Compute Engine          |
 
 
 ## Storage Services
