@@ -7,16 +7,16 @@
    - [Zones](#zones)
    - [Network & Edge Locations](#network--edge-locations)
    - [Available Countries & Territories](#24-available-countries--territories)
-3. [Core Building Blocks](#core-building-blocks-of-gcp)
-   - [Compute Services](#compute-services)
-   - [Storage Services](#storage-services)
-   - [Networking Services](#networking-services)
-   - [Identity and Access Management (IAM)](#identity-and-access-management-iam)
-4. [Interacting with GCP](#interacting-with-gcp)
+3. [Interacting with GCP](#interacting-with-gcp)
    - [Web Console](#web-console)
    - [Cloud Shell](#cloud-shell)
    - [Mobile App](#mobile-app)
    - [REST APIs](#rest-apis)
+4. [Core Building Blocks](#core-building-blocks-of-gcp)
+   - [Compute Services](#compute-services)
+   - [Storage Services](#storage-services)
+   - [Networking Services](#networking-services)
+   - [Identity and Access Management (IAM)](#identity-and-access-management-iam)
 
 ---
 
@@ -88,6 +88,39 @@ GCP is available in over 200 countries and territories, including:
 
 ---
 
+
+## Interacting with GCP
+
+There are various ways users can **access, manage, and control cloud resources and services**. 
+Whether you're deploying applications, configuring infrastructure, monitoring usage, or automating tasks, GCP provides multiple interfaces to suit different workflows and preferences.
+These interaction methods range from **graphical user interfaces (GUIs)** for ease of use, to **command-line tools** and **programmatic APIs** for automation and integration.
+
+
+### Web Console
+- Accessible at [https://console.cloud.google.com](https://console.cloud.google.com)
+- GUI-based interface for managing resources
+- Ideal for quick configuration, monitoring, and billing
+
+### Cloud Shell
+- Browser-based command-line interface
+- Comes with pre-installed SDKs and tools
+- Persistent 5 GB home directory
+- Great for scripting, automation, and CLI access
+  
+### Mobile App
+- Available on Android and iOS
+- Monitor resources, receive alerts, and manage billing
+- Limited functionality compared to Web Console
+  
+### REST APIs
+- Programmatic access to GCP services
+- Use with tools like `curl`, Postman, or custom apps
+- Requires authentication via OAuth 2.0 or service accounts
+- API Explorer: [https://cloud.google.com/apis](https://cloud.google.com/apis)
+
+---
+
+
 # Core Building Blocks of GCP
 
 Google Cloud Platform offers a wide range of services grouped into foundational categories: **Compute**, **Storage**, **Networking**, and **Identity & Access Management (IAM)**. 
@@ -147,33 +180,3 @@ These tools help manage user identities, permissions, and security policies.
 
 ---
 
-## Interacting with GCP
-
-There are various ways users can **access, manage, and control cloud resources and services**. 
-Whether you're deploying applications, configuring infrastructure, monitoring usage, or automating tasks, GCP provides multiple interfaces to suit different workflows and preferences.
-These interaction methods range from **graphical user interfaces (GUIs)** for ease of use, to **command-line tools** and **programmatic APIs** for automation and integration.
-
-
-### Web Console
-- Accessible at [https://console.cloud.google.com](https://console.cloud.google.com)
-- GUI-based interface for managing resources
-- Ideal for quick configuration, monitoring, and billing
-
-### Cloud Shell
-- Browser-based command-line interface
-- Comes with pre-installed SDKs and tools
-- Persistent 5 GB home directory
-- Great for scripting, automation, and CLI access
-  
-### Mobile App
-- Available on Android and iOS
-- Monitor resources, receive alerts, and manage billing
-- Limited functionality compared to Web Console
-  
-### REST APIs
-- Programmatic access to GCP services
-- Use with tools like `curl`, Postman, or custom apps
-- Requires authentication via OAuth 2.0 or service accounts
-- API Explorer: [https://cloud.google.com/apis](https://cloud.google.com/apis)
-
----
