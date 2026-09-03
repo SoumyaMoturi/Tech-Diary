@@ -13,6 +13,7 @@
 |6.|[defer, async, and normal <script> tags](#defer-async-and-normal-script-tags)|
 |7.|[View State Vs Session State](#view-state-vs-session-state)|
 |8.|[Throttling Vs Debouncing](#throttling-vs-debouncing)|
+|9.|[First class functions Vs Higher order functions](#first-class-functions-vs-higher-order-functions)|
 |[React](#react)||
 |1.|[Props Vs State](#props-vs-state)|
 |2.|[React.memo vs UseMemo](#reactmemo-vs-usememo)|
@@ -276,6 +277,22 @@ window.addEventListener('scroll', throttle(function() {
 
 - **Throttling**: Executes the function at regular intervals (e.g., once every 1000ms), regardless of how often the event is triggered.
 - **Debouncing**: Executes the function only after the event has stopped being triggered for a specified time (e.g., 500ms after the last keystroke).
+
+# First class functions Vs Higher order functions
+- First-class function → a property of the language (functions are values).
+- Higher-order function → a function that uses that property (it takes/returns functions).  
+`All higher-order functions require first-class functions to exist, but not all first-class functions are higher-order.`
+
+| Aspect              | First-Class Functions                    | Higher-Order Functions                 |
+|---------------------|------------------------------------------|----------------------------------------|
+| Definition          | Functions treated as values, like any other data type               | Functions that take other functions as arguments and/or return a function |
+| Core idea           | What a language *allows* you to do with functions                   | What a *specific function* does with other functions                |
+| Nature              | A language property/feature                                          | A usage pattern that relies on that feature                          |
+| Requirement         | Functions can be assigned, stored, passed, and returned              | Requires the language to support first-class functions               |
+| Example             | `const greet = () => "hi";`                                          | `[1,2,3].map(x => x * 2)`                                             |
+| Relationship        | Enables higher-order functions to exist                              | A consequence/application of first-class functions                   |
+| Common examples     | JavaScript, Python, Haskell, Scala                                    | `map`, `filter`, `reduce`, `compose`                                  |
+| Question it answers | "Can I treat a function like a value?"                            | "Does this function accept/return another function?" |
 
 # React
 
