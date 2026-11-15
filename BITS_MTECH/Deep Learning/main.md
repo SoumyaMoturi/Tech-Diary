@@ -1,7 +1,4 @@
 # Deep Learning Notes: From Neurons to the McCulloch-Pitts Model
-
-> Course reference: Deep Neural Networks, slide "MP Neuron: Examples".
-
 ---
 
 ## Table of Contents
@@ -156,73 +153,120 @@ The **minimum** valid threshold is $b = g_{\max}^{(0)} + 1$.
 
 ## Solved Examples (from the Slide)
 
+
+Legend: `──►` is a normal (excitatory) connection, `══►` is a doubled connection (the input is counted twice), and `●` marks an **inhibitory** input.
+
 ### Logical AND
 
-| $x_1$ | $x_2$ | $g = x_1 + x_2$ | $y$ |
+```
+  x₁ ────────►╭─────┬─────╮
+              │  g  │  f  ├────► y
+  x₂ ────────►╰─────┴─────╯
+```
+
+| x₁ | x₂ | g = x₁ + x₂ | y |
 |:-:|:-:|:-:|:-:|
 | 0 | 0 | 0 | 0 |
 | 0 | 1 | 1 | 0 |
 | 1 | 0 | 1 | 0 |
 | 1 | 1 | 2 | 1 |
 
-- Largest $g$ where $y=0$ is $1$, and smallest $g$ where $y=1$ is $2$.
-- $1 < b \le 2$, so the **minimum $b = 2$**.
+```
+g₀ = 1  (largest g where y = 0)
+g₁ = 2  (smallest g where y = 1)
 
-$$y = 1 \iff x_1 + x_2 \ge 2$$
+1 < b ≤ 2   ⟹   minimum b = 2
+
+Rule:  y = 1  if  x₁ + x₂ ≥ 2
+```
 
 ---
 
 ### Logical OR
 
-| $x_1$ | $x_2$ | $y$ |
-|:-:|:-:|:-:|
-| 0 | 0 | 0 |
-| 0 | 1 | 1 |
-| 1 | 0 | 1 |
-| 1 | 1 | 1 |
+```
+  x₁ ═══(×2)═►╭─────┬─────╮
+              │  g  │  f  ├────► y
+  x₂ ═══(×2)═►╰─────┴─────╯
+```
 
-On the slide, **each input is connected twice** (see the doubled arrows), so each input effectively contributes $2$:
+| x₁ | x₂ | g = 2x₁ + 2x₂ | y |
+|:-:|:-:|:-:|:-:|
+| 0 | 0 | 0 | 0 |
+| 0 | 1 | 2 | 1 |
+| 1 | 0 | 2 | 1 |
+| 1 | 1 | 4 | 1 |
 
-$$g = 2x_1 + 2x_2, \qquad y = 1 \iff g \ge 2 \;\Rightarrow\; b = 2$$
+```
+g₀ = 0,  g₁ = 2
 
-> **Note:** with a *single* line per input, OR needs only $b = 1$, since $g = x_1 + x_2 \ge 1$. The slide's $b=2$ comes from the doubled connections.
+0 < b ≤ 2
+
+Slide answer:  b = 2
+Rule:          y = 1  if  2x₁ + 2x₂ ≥ 2
+```
+
+> With a **single** line per input, g = x₁ + x₂ and OR needs only **b = 1**.
 
 ---
 
 ### Identity Function
 
-| $x$ | $y$ |
-|:-:|:-:|
-| 0 | 0 |
-| 1 | 1 |
+```
+  x  ═══(×2)═►╭─────┬─────╮
+              │  g  │  f  ├────► y
+              ╰─────┴─────╯
+```
 
-The input is again connected twice, so:
+| x | g = 2x | y |
+|:-:|:-:|:-:|
+| 0 | 0 | 0 |
+| 1 | 2 | 1 |
 
-$$g = 2x, \qquad y = 1 \iff 2x \ge 2 \;\Rightarrow\; b = 2$$
+```
+g₀ = 0,  g₁ = 2
 
-(With a single connection, $b = 1$ would work.)
+0 < b ≤ 2
+
+Slide answer:  b = 2
+Rule:          y = 1  if  2x ≥ 2
+```
+
+> With a **single** line, g = x and the identity function needs only **b = 1**.
 
 ---
 
 ### Inhibitory Function
 
-Implements $x_1$ AND NOT $x_2$.
+Implements: **x₁ AND NOT x₂**. The red dot on the slide marks x₂ as inhibitory.
 
-$x_2$ is **inhibitory** (the red dot on the slide).
+```
+  x₁ ────────►╭─────┬─────╮
+              │  g  │  f  ├────► y
+  x₂ ──────●─►╰─────┴─────╯
+           ▲
+       inhibitory
+```
 
-| $x_1$ | $x_2$ | $\overline{x_2}$ | $y$ |
+| x₁ | x₂ | NOT x₂ | y |
 |:-:|:-:|:-:|:-:|
 | 0 | 0 | 1 | 0 |
 | 0 | 1 | 0 | 0 |
 | 1 | 0 | 1 | 1 |
 | 1 | 1 | 0 | 0 |
 
-$$y = \big[\,g(\mathbf{x}) \ge b\,\big] \ \text{AND} \ \overline{x_2}$$
+```
+y = [ g(x) ≥ b ]  AND  (NOT x₂)
 
-Rule: if $x_2 = 1$ then $y = 0$ regardless of $x_1$. Otherwise the neuron fires only when $x_1$ is active. The slide uses $b = 2$, which matches the doubled-input convention in the earlier examples. With a single $x_1$ line you would need only $b=1$.
+Slide:  y = (1 if g(x) ≥ 2) AND (NOT x₂)   ⟹   b = 2
+```
+
+How it works:
+
+- If x₂ = 1, the inhibitory input forces y = 0, whatever x₁ is.
+- If x₂ = 0, the neuron behaves like a plain threshold unit on x₁.
 
 ---
-
 ## Extra Practice Problems
 
 **Problem A: NOT gate.** Design an MP neuron for $y = \overline{x}$.
