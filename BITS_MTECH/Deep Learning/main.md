@@ -16,10 +16,15 @@
   - [Logical OR](#logical-or)
   - [Identity Function](#identity-function)
   - [Inhibitory Function](#inhibitory-function)
-- [Extra Practice Problems](#extra-practice-problems)
+- [How the MP Neuron Attempts to Learn](#how-the-mp-neuron-attempts-to-learn)
+  - [Problem Setup](#problem-setup)
+  - [Training Data](#training-data)
+  - [Predictions for Each Threshold](#predictions-for-each-threshold)
+  - [Comparing Predictions with the Actual Output](#comparing-predictions-with-the-actual-output)
+  - [Takeaways](#takeaways)
 - [Limitations of the MP Neuron](#limitations-of-the-mp-neuron)
 - [Quick Reference Summary](#quick-reference-summary)
-
+- [Extra Practice Problems](#extra-practice-problems)
 ---
 
 ## Deep Learning
@@ -267,25 +272,111 @@ How it works:
 - If x₂ = 0, the neuron behaves like a plain threshold unit on x₁.
 
 ---
-## Extra Practice Problems
 
-**Problem A: NOT gate.** Design an MP neuron for $y = \overline{x}$.
-Make $x$ **inhibitory** and set $b = 0$. With $x = 0$: $g = 0 \ge 0$, so $y = 1$. With $x = 1$: the inhibitory input forces $y = 0$.
 
-**Problem B: 3-input AND.** Find $b$ for $y = x_1 \wedge x_2 \wedge x_3$.
-$g = x_1 + x_2 + x_3$. Only $(1,1,1)$ gives $y=1$, with $g=3$. The largest $g$ for $y=0$ is $2$.
-**Answer: $b = 3$.**
+## How the MP Neuron Attempts to Learn
 
-**Problem C: 3-input OR.** Find $b$ for $y = x_1 \vee x_2 \vee x_3$.
-The smallest $g$ for $y=1$ is $1$, and the largest for $y=0$ is $0$.
-**Answer: $b = 1$** (single connections).
+### Problem Setup
 
-**Problem D: "At least 2 of 3" (majority).**
-$g = x_1 + x_2 + x_3$. Rows with $y=1$ have $g \ge 2$, and rows with $y=0$ have $g \le 1$.
-**Answer: $b = 2$.**
+- Data for **10 suspected cancer patients (P1 to P10)** is given across **9 attributes** (x₁ to x₉). The table also shows whether malignancy is actually present (**y**).
+- The attributes are **boolean**, binarized using some criterion. Example: if radius ≥ 10 mm then x₂ = 1, otherwise 0.
+- The **count of 1's** for each patient is also shown.
+- The table is the **training data**. The objective is to prepare an MP neuron that predicts malignancy (ŷ) for a new patient from the 9 boolean attributes.
+- **Learning** here means finding the threshold **b** so that the neuron's output ŷ matches the true malignancy y as closely as possible.
+- b can range only from **0 to n**, where n is the number of attributes. Here n = 9.
+- For each b from 0 to 9, the predicted value ŷ is calculated.
 
-**Problem E: NOR gate.** $y = \overline{x_1 + x_2}$.
-Make both inputs **inhibitory** and set $b = 0$. Then $y = 1$ only when $x_1 = x_2 = 0$.
+```
+  x₁ ──►┐
+  x₂ ──►┤   ╭───────┬───────╮
+   ⋮    ├──►│   g   │   f   ├───► ŷ
+  x₉ ──►┘   ╰───────┴───────╯
+
+              9
+  g(x)  =     Σ   xᵢ          (the count of 1's)
+             i=1
+
+               ⎧ 1,   if g(x) ≥ b
+  ŷ = f(g(x)) = ⎨
+               ⎩ 0,   if g(x) < b
+```
+
+### Training Data
+
+Cancer data for 10 patients across 9 attributes:
+
+| Attribute | P1 | P2 | P3 | P4 | P5 | P6 | P7 | P8 | P9 | P10 |
+|---|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|
+| x₁ Diagnosis | 0 | 1 | 1 | 0 | 0 | 1 | 0 | 1 | 1 | 0 |
+| x₂ Radius | 1 | 0 | 1 | 0 | 0 | 0 | 1 | 0 | 0 | 1 |
+| x₃ Texture | 1 | 0 | 1 | 0 | 1 | 0 | 1 | 0 | 1 | 0 |
+| x₄ Concavity | 1 | 1 | 0 | 0 | 0 | 1 | 0 | 1 | 0 | 0 |
+| x₅ Compactness | 1 | 1 | 1 | 1 | 1 | 1 | 1 | 1 | 1 | 0 |
+| x₆ Smoothness | 0 | 1 | 1 | 0 | 1 | 0 | 1 | 1 | 1 | 0 |
+| x₇ Perimeter | 1 | 0 | 0 | 1 | 1 | 1 | 0 | 0 | 0 | 0 |
+| x₈ Protein Test | 0 | 0 | 0 | 1 | 0 | 1 | 0 | 1 | 0 | 0 |
+| x₉ Inflammation | 0 | 1 | 1 | 0 | 0 | 0 | 1 | 1 | 1 | 0 |
+| **Count of 1's (g)** | **5** | **5** | **6** | **3** | **4** | **5** | **5** | **6** | **5** | **1** |
+| **Malignancy (y)** | **1** | **1** | **1** | **0** | **0** | **1** | **1** | **1** | **0** | **0** |
+
+### Predictions for Each Threshold
+
+Since the MP neuron only uses the count of 1's, **ŷ = 1 exactly when the count ≥ b**.
+
+| Threshold | P1 | P2 | P3 | P4 | P5 | P6 | P7 | P8 | P9 | P10 |
+|---|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|
+| **Actual y** | **1** | **1** | **1** | **0** | **0** | **1** | **1** | **1** | **0** | **0** |
+| b = 0, ŷ | 1 | 1 | 1 | 1 | 1 | 1 | 1 | 1 | 1 | 1 |
+| b = 1, ŷ | 1 | 1 | 1 | 1 | 1 | 1 | 1 | 1 | 1 | 1 |
+| b = 2, ŷ | 1 | 1 | 1 | 1 | 1 | 1 | 1 | 1 | 1 | 0 |
+| b = 3, ŷ | 1 | 1 | 1 | 1 | 1 | 1 | 1 | 1 | 1 | 0 |
+| b = 4, ŷ | 1 | 1 | 1 | 0 | 1 | 1 | 1 | 1 | 1 | 0 |
+| b = 5, ŷ | 1 | 1 | 1 | 0 | 0 | 1 | 1 | 1 | 1 | 0 |
+| b = 6, ŷ | 0 | 0 | 1 | 0 | 0 | 0 | 0 | 1 | 0 | 0 |
+| b = 7, ŷ | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 |
+| b = 8, ŷ | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 |
+| b = 9, ŷ | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 |
+
+The slide colors matching predictions blue and mismatches orange.
+
+### Comparing Predictions with the Actual Output
+
+> This section is my own calculation from the slide's table (the slide stops at the predictions). Errors are patients where ŷ ≠ y.
+
+| b | Wrong patients | Errors | Accuracy |
+|:-:|---|:-:|:-:|
+| 0 | P4, P5, P9, P10 | 4 | 60% |
+| 1 | P4, P5, P9, P10 | 4 | 60% |
+| 2 | P4, P5, P9 | 3 | 70% |
+| 3 | P4, P5, P9 | 3 | 70% |
+| 4 | P5, P9 | 2 | 80% |
+| **5** | **P9** | **1** | **90%** |
+| 6 | P1, P2, P6, P7 | 4 | 60% |
+| 7 | P1, P2, P3, P6, P7, P8 | 6 | 40% |
+| 8 | P1, P2, P3, P6, P7, P8 | 6 | 40% |
+| 9 | P1, P2, P3, P6, P7, P8 | 6 | 40% |
+
+```
+Errors vs threshold b
+
+b=0  ████ 4
+b=1  ████ 4
+b=2  ███  3
+b=3  ███  3
+b=4  ██   2
+b=5  █    1   ◄── best threshold
+b=6  ████ 4
+b=7  ██████ 6
+b=8  ██████ 6
+b=9  ██████ 6
+```
+
+### Takeaways
+
+- **Learning = searching b.** There are only n + 1 = 10 candidate thresholds (0 to 9), so the "training" is just trying each one and keeping the best.
+- **Best threshold is b = 5**, with 9 of 10 patients classified correctly.
+- **Too low** a b predicts malignant for almost everyone (high false positives). **Too high** a b predicts benign for almost everyone (misses real cases).
+- **A perfect fit is impossible here.** P9 (y = 0) and P1, P2, P6, P7 (y = 1) all have a count of 5. The MP neuron sees only the count, so it cannot separate them. This is the limitation that **weighted inputs** (the Perceptron) fix: each attribute can then matter differently.
 
 ---
 
@@ -315,3 +406,27 @@ These limitations led to the **Perceptron**, which adds learnable weights $w_i$ 
 | Majority (2 of 3) | $x_1, x_2, x_3$ | all excitatory | 2 | n/a |
 
 **Recap:** an MP neuron sums binary inputs, fires if the sum reaches the threshold $b$, and any active inhibitory input vetoes the output.
+
+---
+## Extra Practice Problems
+
+**Problem A: NOT gate.** Design an MP neuron for $y = \overline{x}$.
+Make $x$ **inhibitory** and set $b = 0$. With $x = 0$: $g = 0 \ge 0$, so $y = 1$. With $x = 1$: the inhibitory input forces $y = 0$.
+
+**Problem B: 3-input AND.** Find $b$ for $y = x_1 \wedge x_2 \wedge x_3$.
+$g = x_1 + x_2 + x_3$. Only $(1,1,1)$ gives $y=1$, with $g=3$. The largest $g$ for $y=0$ is $2$.
+**Answer: $b = 3$.**
+
+**Problem C: 3-input OR.** Find $b$ for $y = x_1 \vee x_2 \vee x_3$.
+The smallest $g$ for $y=1$ is $1$, and the largest for $y=0$ is $0$.
+**Answer: $b = 1$** (single connections).
+
+**Problem D: "At least 2 of 3" (majority).**
+$g = x_1 + x_2 + x_3$. Rows with $y=1$ have $g \ge 2$, and rows with $y=0$ have $g \le 1$.
+**Answer: $b = 2$.**
+
+**Problem E: NOR gate.** $y = \overline{x_1 + x_2}$.
+Make both inputs **inhibitory** and set $b = 0$. Then $y = 1$ only when $x_1 = x_2 = 0$.
+
+---
+
