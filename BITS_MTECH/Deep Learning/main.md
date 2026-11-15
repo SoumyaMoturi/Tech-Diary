@@ -33,6 +33,14 @@
   - [Slope and Angle](#slope-and-angle)
   - [Extension to Multiple Dimensions](#extension-to-multiple-dimensions)
   - [Connection to the MP Neuron](#connection-to-the-mp-neuron)
+- [Single MP Neuron: Limitations](#single-mp-neuron-limitations)
+  - [The XOR Problem](#the-xor-problem)
+  - [Trying Every Threshold](#trying-every-threshold)
+  - [The Best Model and Its Line](#the-best-model-and-its-line)
+  - [Graph of the XOR Data](#graph-of-the-xor-data)
+  - [Why No Line Works](#why-no-line-works)
+  - [Further Limitations from the Slide](#further-limitations-from-the-slide)
+  - [What Solves It](#what-solves-it)
   
 ---
 
@@ -591,4 +599,162 @@ Boundary:  x₁ + x₂ − 2 = 0
 ```
 
 This is why a single MP neuron can only represent **linearly separable** functions: it can only split the inputs with one straight line.
+
+
+## Single MP Neuron: Limitations
+
+
+### The XOR Problem
+
+- The table has two inputs (x₁, x₂) and an output y. It is the **XOR function**: y = 1 when exactly one input is 1.
+- The goal is to develop a **single MP neuron** that learns this function.
+- From the MP neuron model:
+
+```
+ŷ = 1   if   Σ xᵢ ≥ b        (sum over i = 1 to n)
+ŷ = 0   otherwise
+```
+
+```
+  x₁ ──►╮ ╭───────┬───────╮
+        ├─►   g   │   f   ├───► ŷ
+  x₂ ──►╯ ╰───────┴───────╯
+```
+
+### Trying Every Threshold
+
+For two inputs, b can range from **0 to 2**. For each b the loss is **Σ(y − ŷ)²**, the number of wrong predictions here (each wrong prediction contributes 1).
+
+| Point | x₁ | x₂ | y | ŷ (b = 0) | ŷ (b = 1) | ŷ (b = 2) |
+|:-:|:-:|:-:|:-:|:-:|:-:|:-:|
+| A | 0 | 0 | 0 | 1 | 0 | 0 |
+| B | 0 | 1 | 1 | 1 | 1 | 0 |
+| C | 1 | 0 | 1 | 1 | 1 | 0 |
+| D | 1 | 1 | 0 | 1 | 1 | 1 |
+| | **Loss Σ(y − ŷ)²** | | | **2** | **1** | **3** |
+
+The lecturer labels the four rows **A, B, C, D** on the slide, and the same letters mark the points on the graph.
+
+- b = 0: always predicts 1, so A and D are wrong (loss 2).
+- b = 1: only D (x₁ = x₂ = 1) is wrong (loss 1).
+- b = 2: B, C and D are wrong (loss 3).
+
+The loss is smallest at **b = 1**, but it is **not 0**, so the model is **not perfect**.
+
+### The Best Model and Its Line
+
+With b = 1 the model is:
+
+```
+x₁ + x₂ ≥ 1        or        x₁ + x₂ − 1 ≥ 0
+```
+
+The lecturer's handwritten working rearranges this to:
+
+```
+x₁ + x₂ − 1 ≥ 0
+x₂ ≥ − x₁ + 1
+```
+
+The boundary line is **x₁ + x₂ − 1 = 0**. Using the earlier formulas with a = 1, b = 1, d = −1:
+
+| Quantity | Calculation | Value |
+|---|---|:-:|
+| Slope | − a / b = − 1 / 1 | **−1** |
+| x₂-intercept | − d / b = − (−1) / 1 | **1** |
+
+### Graph of the XOR Data
+
+Legend: points **B** and **C** (green on the slide) have y = 1, points **A** and **D** (red on the slide) have y = 0, and `*` is the line x₁ + x₂ = 1.
+
+```
+  x₂
+  2.5   **    |          
+  2.0     *   |          
+  1.5      ***|          
+  1.0         B   D      
+  0.5         |***       
+  0.0   ------A---C------
+ -0.5         |    ***   
+ -1.0         |       *  
+         -1   0   1   2   x₁
+```
+
+| Point | (x₁, x₂) | Actual y | Colour on slide | Side of the line | ŷ with b = 1 | Correct? |
+|:-:|:-:|:-:|:-:|---|:-:|:-:|
+| A | (0, 0) | 0 | red | below (x₁ + x₂ − 1 = −1) | 0 | yes |
+| B | (0, 1) | 1 | green | on the line (value 0) | 1 | yes |
+| C | (1, 0) | 1 | green | on the line (value 0) | 1 | yes |
+| D | (1, 1) | 0 | red | above (x₁ + x₂ − 1 = +1) | 1 | **no** |
+
+### Why No Line Works
+
+If the model were perfect, it would divide the input space into two parts:
+
+- Inputs with output **1** must be **on or on one side** of the line.
+- Inputs with output **0** must **not** be on that side.
+
+Here the model fails this partition. In fact, **no straight line can do it**, because the two classes sit on opposite diagonals of a square:
+
+```
+   x₂
+    1   B(0,1) y=1      D(1,1) y=0
+    0   A(0,0) y=0      C(1,0) y=1
+        0                1          x₁
+```
+
+Proof with thresholds (my addition):
+
+```
+Need B (0,1) to fire:      0 + 1 ≥ b   ⟹   b ≤ 1
+Need C (1,0) to fire:      1 + 0 ≥ b   ⟹   b ≤ 1
+Need D (1,1) NOT to fire:  1 + 1 < b   ⟹   b > 2
+
+b ≤ 1 and b > 2 cannot both be true.
+```
+
+So XOR is **not linearly separable**, and a single MP neuron can never represent it.
+
+### Further Limitations from the Slide
+
+The XOR example leads to three general conclusions, highlighted in red on the slide.
+
+**1. A single MP neuron can fail even at 2-class classification.**
+It only works when the input space is **linearly separable** for the given outputs, meaning one straight line can put all the 1s on one side and all the 0s on the other.
+
+| Function | Linearly separable? | Single MP neuron works? |
+|---|:-:|:-:|
+| AND | yes | yes (b = 2) |
+| OR | yes | yes (b = 1) |
+| XOR | **no** | **no** (best loss is 1, never 0) |
+
+**2. Slope and intercepts are discrete, so the partitioning is rigid.**
+With all inputs weighted equally, the boundary is x₁ + x₂ = b, and b can only be a whole number from 0 to n. For two inputs this leaves just **three possible lines**, all with the same slope of −1:
+
+| b | Boundary line | Slope | x₂-intercept |
+|:-:|---|:-:|:-:|
+| 0 | x₂ = − x₁ | −1 | 0 |
+| 1 | x₂ = − x₁ + 1 | −1 | 1 |
+| 2 | x₂ = − x₁ + 2 | −1 | 2 |
+
+The line cannot be tilted or shifted by a fractional amount to fit the data better. Weights (in the Perceptron) remove this restriction.
+
+**3. No real-valued inputs or outputs.**
+The MP neuron accepts only binary inputs (0 or 1) and gives a binary output. It cannot handle values like a radius of 7.3 mm or return a probability.
+
+```
+Summary of single MP neuron limitations
+
+  ├── Only linearly separable functions     (fails on XOR)
+  ├── Rigid, discrete boundary              (slope fixed at -1, b is a whole number)
+  └── Binary inputs and outputs only        (no real values)
+```
+
+### What Solves It
+
+> This part is my own addition for context.
+
+- XOR can be built by combining neurons: XOR(x₁, x₂) = (x₁ OR x₂) AND NOT (x₁ AND x₂). This needs a **hidden layer**, which is why we use **multi-layer networks**.
+- A single Perceptron (weighted inputs, still one straight-line boundary) also cannot solve XOR, so adding weights alone is not enough.
+
 
