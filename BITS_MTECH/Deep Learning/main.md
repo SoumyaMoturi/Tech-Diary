@@ -25,6 +25,15 @@
 - [Limitations of the MP Neuron](#limitations-of-the-mp-neuron)
 - [Quick Reference Summary](#quick-reference-summary)
 - [Extra Practice Problems](#extra-practice-problems)
+- [The Equation of a Line](#the-equation-of-a-line)
+  - [Basic Forms](#basic-forms)
+  - [Worked Example](#worked-example)
+  - [Graph of the Line](#graph-of-the-line)
+  - [Points On, Above and Below the Line](#points-on-above-and-below-the-line)
+  - [Slope and Angle](#slope-and-angle)
+  - [Extension to Multiple Dimensions](#extension-to-multiple-dimensions)
+  - [Connection to the MP Neuron](#connection-to-the-mp-neuron)
+  
 ---
 
 ## Deep Learning
@@ -429,4 +438,158 @@ $g = x_1 + x_2 + x_3$. Rows with $y=1$ have $g \ge 2$, and rows with $y=0$ have 
 Make both inputs **inhibitory** and set $b = 0$. Then $y = 1$ only when $x_1 = x_2 = 0$.
 
 ---
+
+## The Equation of a Line
+
+> Slide: "The Equation of a Line". This is the geometry behind decision boundaries in neural networks.
+
+### Basic Forms
+
+**Slope-intercept form:**
+
+```
+y = m·x + c
+```
+
+- m = slope
+- c = y-axis intercept
+
+In Deep Learning, **y is normally used for the output**. So for two variables (two dimensions) x₁ and x₂, the line is rewritten as:
+
+```
+x₂ = m·x₁ + c
+```
+
+**General form:**
+
+```
+a·x₁ + b·x₂ + d = 0
+
+slope (m)             =  − a / b
+x₂-axis intercept (c) =  − d / b
+```
+
+How the general form gives the slope and intercept:
+
+```
+a·x₁ + b·x₂ + d = 0
+        b·x₂    = −a·x₁ − d
+           x₂   = (−a/b)·x₁ + (−d/b)
+                    ▲            ▲
+                  slope m    intercept c
+```
+
+### Worked Example
+
+The slide uses the line **3x₁ + 4x₂ − 5 = 0**, so a = 3, b = 4, d = −5.
+
+| Quantity | Calculation | Value |
+|---|---|:-:|
+| Slope (m) | − a / b = − 3 / 4 | −0.75 |
+| x₂-intercept (c) | − d / b = − (−5) / 4 | 1.25 (= 5/4) |
+| x₁-intercept (my addition) | set x₂ = 0: 3x₁ = 5 | 1.67 (= 5/3) |
+
+### Graph of the Line
+
+Graph of **3x₁ + 4x₂ − 5 = 0**. The line is drawn with `*`. Points: **P** (1, 0.5) and **Q** (−1, 2) lie on the line, **A** (2, 1) is above it, and **B** (0.5, 0.5) is below it.
+
+```
+  x₂
+  4.0     *             |                
+  3.5      ***          |                
+  3.0         ***       |                
+  2.5            **     |                
+  2.0              *Q*  |                
+  1.5                 **|                
+  1.0                   ***     A        
+  0.5                   | B*P*           
+  0.0   ----------------+-----***--------
+ -0.5                   |        **      
+ -1.0                   |          ***   
+ -1.5                   |             *  
+       -4  -3  -2  -1   0   1   2   3   4   x₁
+```
+
+Reading the graph:
+
+- The line crosses the x₂-axis at 1.25 and the x₁-axis at about 1.67.
+- It slopes **downward** to the right, which matches the negative slope −3/4.
+- For every 4 units moved right along x₁, the line drops 3 units in x₂.
+
+### Points On, Above and Below the Line
+
+Substitute a point into the left side, **3x₁ + 4x₂ − 5**, and look at the sign:
+
+| Point | Position | Calculation | Result |
+|---|---|---|:-:|
+| P (1, 0.5) | on the line | 3(1) + 4(0.5) − 5 | **0** |
+| Q (−1, 2) | on the line | 3(−1) + 4(2) − 5 | **0** |
+| A (2, 1) | above the line | 3(2) + 4(1) − 5 | **+5** |
+| B (0.5, 0.5) | below the line | 3(0.5) + 4(0.5) − 5 | **−1.5** |
+
+```
+   3x₁ + 4x₂ − 5  >  0     ──►   above the line   (positive side)
+   3x₁ + 4x₂ − 5  =  0     ──►   on the line
+   3x₁ + 4x₂ − 5  <  0     ──►   below the line   (negative side)
+```
+
+> **Key idea:** the sign of the expression tells you which side of the line a point is on. This is exactly how a neuron uses a line to classify points into two classes.
+
+### Slope and Angle
+
+From the lecturer's handwritten working on the slide:
+
+```
+slope  =  − 3/4
+
+tan θ  =  − 3/4
+
+θ      =  tan⁻¹(− 3/4)  ≈  − 36.87°
+```
+
+- θ is the angle the line makes with the positive x₁-axis.
+- A negative angle of about −36.87° is the same direction as **143.13°** measured anticlockwise (180° − 36.87°).
+- The final value in the handwriting is hard to read, so the number above is my own calculation.
+
+### Extension to Multiple Dimensions
+
+The same idea works for any number of dimensions (x₁, x₂, x₃, … xₙ). The equation is written on the slide as:
+
+```
+a·x₁ + b·x₂ + … + m·xₙ + β = 0
+```
+
+In the usual neural network notation, with weights wᵢ and bias b:
+
+```
+w₁·x₁ + w₂·x₂ + … + wₙ·xₙ + b = 0
+```
+
+| Dimensions | Shape of the boundary |
+|:-:|---|
+| 2 (x₁, x₂) | a **line** |
+| 3 (x₁, x₂, x₃) | a **plane** |
+| n (x₁ … xₙ) | a **hyperplane** |
+
+### Connection to the MP Neuron
+
+
+The MP neuron fires when **g(x) ≥ b**, which can be rewritten as:
+
+```
+x₁ + x₂ + … + xₙ − b  ≥  0
+```
+
+So its decision boundary is the line (or hyperplane) **x₁ + x₂ + … + xₙ − b = 0**. For Logical AND with b = 2:
+
+```
+Boundary:  x₁ + x₂ − 2 = 0
+
+   (0,0):  0 + 0 − 2 = −2   below the line  ──► y = 0
+   (0,1):  0 + 1 − 2 = −1   below the line  ──► y = 0
+   (1,0):  1 + 0 − 2 = −1   below the line  ──► y = 0
+   (1,1):  1 + 1 − 2 =  0   on the line     ──► y = 1  (fires, since ≥ 0)
+```
+
+This is why a single MP neuron can only represent **linearly separable** functions: it can only split the inputs with one straight line.
 
