@@ -441,7 +441,6 @@ Make both inputs **inhibitory** and set $b = 0$. Then $y = 1$ only when $x_1 = x
 
 ## The Equation of a Line
 
-> Slide: "The Equation of a Line". This is the geometry behind decision boundaries in neural networks.
 
 ### Basic Forms
 
