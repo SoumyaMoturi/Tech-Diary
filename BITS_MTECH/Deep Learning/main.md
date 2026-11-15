@@ -140,16 +140,15 @@ Here **b** is the threshold (also called bias, and written θ in some textbooks)
 
 ### How to Find the Minimum Threshold b
 
-1. For every row where $y=1$, compute $g(\mathbf{x})$ and take the **smallest** value, call it $g_{\min}^{(1)}$.
-2. For every row where $y=0$, compute $g(\mathbf{x})$ and take the **largest** value, call it $g_{\max}^{(0)}$.
-3. A valid $b$ must satisfy:
+1. For every row where y = 1, compute g(x). Take the **smallest** value: call it **g₁**.
+2. For every row where y = 0, compute g(x). Take the **largest** value: call it **g₀**.
+3. A valid threshold must satisfy:
 
-$$
-g_{\max}^{(0)} < b \le g_{\min}^{(1)}
-$$
+```
+g₀  <  b  ≤  g₁
+```
 
-The **minimum** valid threshold is $b = g_{\max}^{(0)} + 1$.
-
+The **minimum** valid integer threshold is **b = g₀ + 1**.
 ---
 
 ## Solved Examples (from the Slide)
