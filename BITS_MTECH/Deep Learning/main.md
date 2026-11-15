@@ -115,27 +115,28 @@ flowchart LR
 
 **Aggregation (g):**
 
-$$
-g(\mathbf{x}) = \sum_{i=1}^{n} x_i
-$$
+```
+          n
+g(x)  =   Σ   xᵢ
+         i=1
+```
 
 **Decision (f):**
 
-$$
-y = f\big(g(\mathbf{x})\big) =
-\begin{cases}
-1, & g(\mathbf{x}) \ge b \\[4pt]
-0, & g(\mathbf{x}) < b
-\end{cases}
-$$
+```
+               ⎧ 1,   if g(x) ≥ b
+y = f(g(x)) =  ⎨
+               ⎩ 0,   if g(x) < b
+```
 
 **With an inhibitory input:**
 
-$$
-y = 0 \ \text{ if any inhibitory input is } 1; \quad \text{otherwise } y = f\big(g(\mathbf{x})\big)
-$$
+```
+y = 0                if any inhibitory input = 1
+y = f(g(x))          otherwise
+```
 
-Here $b$ is the **threshold (bias)**, written $\theta$ in some textbooks.
+Here **b** is the threshold (also called bias, and written θ in some textbooks).
 
 ### How to Find the Minimum Threshold b
 
